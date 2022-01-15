@@ -10,18 +10,18 @@
         <meta name="description" content=""/>
         <meta name="keywords" content=""/>
         <!--css start-->
-        
-        <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('public/css/style.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('public/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('public/css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css"/>
-        <!-- <link href="{{ asset('public/css/bootstrap-datepicker.css') }}" rel="stylesheet" type="text/css"/> -->
+
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css"/>
+        <!-- <link href="{{ asset('css/bootstrap-datepicker.css') }}" rel="stylesheet" type="text/css"/> -->
         @if(Route::currentRouteName()=='bookinghotels')
         @else
-        <link href="{{ asset('public/css/light-carousel.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/light-carousel.css') }}" rel="stylesheet" type="text/css">
         @endif
-        <link rel="shortcut icon" type="image/png" href="{{ asset('public/favicon.png') }}"/>
+        <link rel="shortcut icon" type="image/png" href="{{ asset('favicon.png') }}"/>
         <!-- font awsome -->
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <!-- css close-->
@@ -61,9 +61,9 @@
         }
       </style>
       <script src="https://code.jquery.com/jquery-3.3.0.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script> -->
-  
+
         <script type="text/javascript">
             $.ajaxSetup ( {
                 headers: {
@@ -71,21 +71,23 @@
                 }
             } );
         </script>
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- end adding development time -->
 
     </head>
     <body data-spy="scroll" data-target=".hotel-details-navbar" data-offset="130">
       <div id="loading">
-      <img id="loading-image" src="{{ asset('public/loder.gif') }}" alt="Loading..." />
+      <img id="loading-image" src="{{ asset('loder.gif') }}" alt="Loading..." />
       </div>
       <div id="loading_small">
       </div>
         <section>
             @include('common.header')
-            
+
 
             @yield('content')
-            
+
             @include('common.footer')
 <!-- The Modal -->
 <div class="modal fade" id="baggage-and-fare">
@@ -125,7 +127,7 @@
         </div>
         <div id="baggage_rules" class="container tab-pane fade">
           <div class="media mb-3">
-            <div class="media-left"><img src="{{ asset('public/images/6E.png') }}" alt="6E.png" style="width:50px;height:50px;" class="mr-2"/></div>
+            <div class="media-left"><img src="{{ asset('images/6E.png') }}" alt="6E.png" style="width:50px;height:50px;" class="mr-2"/></div>
             <div class="media-body align-self-center">
               <h6 class="m-0">IXC-BLR <small class="text-muted">6E-491</small></h6>
             </div>
@@ -150,16 +152,19 @@
 </div>
 </div>
 <!-- JavaScript -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{ asset('public/js/popper.min.js') }}"></script>
-<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('public/js/bootstrap-datetimepicker.min.js') }}"></script>
-<script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <!-- <script src="js/bootstrap-datepicker.js"></script> -->
 
 
 <!-- <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script> -->
-<script src="{{ asset('public/js/jquery.light-carousel.js') }}"></script>
+<script src="{{ asset('js/jquery.light-carousel.js') }}"></script>
 
 
 
@@ -185,7 +190,7 @@ x.style.display = "none";
 }
 </script>
 <script>
-// Bootstrap tooltip enable 
+// Bootstrap tooltip enable
 $(document).ready(function(){
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -196,7 +201,7 @@ $(document).ready(function(){
 jQuery(function () {
       jQuery('#datetimepicker, #datetimepicker1').datetimepicker({
             pickTime: false,
-            autoclose: true, 
+            autoclose: true,
             todayHighlight: true,
       });
 });
@@ -254,9 +259,9 @@ $(document).ready(function(){
 </script>
 
 <!-- start add some javascript -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script> -->
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-<!-- <script src="{{ asset('public/js/typeahead.bundle.min.js') }}"></script> -->
+<!-- <script src="{{ asset('js/typeahead.bundle.min.js') }}"></script> -->
 <!-- end add some javascript -->
 @yield('script')
 

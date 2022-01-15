@@ -27,7 +27,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cookies.php">Cookies</a>
-                </li>     
+                </li>
             </ul>
         </div>
     </div>
@@ -52,7 +52,7 @@
                <li><a href="#"><i class="lab la-youtube"></i></a></li>
                <li><a href="#"><i class="lab la-instagram"></i></a></li>
            </ul>
-           <img src="{{ asset('public/images/credit_logo.png') }}" alt="credit logo" class="img-fluid mt-3"/>
+           <img src="{{ asset('images/credit_logo.png') }}" alt="credit logo" class="img-fluid mt-3"/>
         </div>
         <div class="col-lg-3 col-md-4">
             <h4 class="font-weight-500 mb-2">Contact Us</h4>

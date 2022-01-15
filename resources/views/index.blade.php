@@ -14,13 +14,13 @@
     <!-- The slideshow -->
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('public/images/book-holiday.jpg') }}" alt="flight discount" class="img-fluid">
+            <img src="{{ asset('images/book-holiday.jpg') }}" alt="flight discount" class="img-fluid">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('public/images/flight-discount2.jpg') }}" alt="flight discount" class="img-fluid">
+            <img src="{{ asset('images/flight-discount2.jpg') }}" alt="flight discount" class="img-fluid">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('public/images/flight-discount1.jpg') }}" alt="flight discount" class="img-fluid">
+            <img src="{{ asset('images/flight-discount1.jpg') }}" alt="flight discount" class="img-fluid">
         </div>
     </div>
 
@@ -108,7 +108,7 @@
                     <div class="form-group">
                         <label>Passengers & Class</label>
                         <input type="text" name="" id="flight_travel_details" placeholder="1 Adult,  Economy" class="form-control" onclick="traveller_selection();">
-                    
+
                         <div id="traveller_selection" style="display:none;">
                             <div class="row m-0">
                                 <div class="col-6 px-2">
@@ -187,33 +187,19 @@
                         <input type="text" name="city_name" id="city_name" required placeholder="New Delhi" class="form-control search_hotel">
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label>Check In</label>
-                                <div id="check_in_datetimepicker" class="input-group check_in_datetimepickerclass">
-                                    <input type="text" name="check_in" required id="check_in" placeholder="dd/mm/yyyy" class="form-control border-right-0 check_in_datetimepickerclass" data-format="dd-MM-yyyy">
-                                    <div class="input-group-append add-on check_in_datetimepickerclass">
-                                      <span class="input-group-text bg-white pl-0 check_in_datetimepickerclass"><i class="lar la-calendar-alt check_in_datetimepickerclass"></i></span>
-                                    </div>
-                                </div>
+                            <input type="text" name="checkInOut" value="01/01/2018 - 01/15/2018" class="form-control" />
+                                <label>Check In and Check Out</label>
+
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Check Out</label>
-                                <div id="check_out_datetimepicker" class="input-group check_out_datetimepickerclass">
-                                    <input type="text" name="check_out" required id="check_out" placeholder="dd/mm/yyyy" class="form-control border-right-0 check_out_datetimepickerclass" data-format="dd-MM-yyyy">
-                                    <div class="input-group-append add-on check_out_datetimepickerclass">
-                                      <span class="input-group-text bg-white pl-0 check_out_datetimepickerclass"><i class="lar la-calendar-alt check_out_datetimepickerclass"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="form-group">
                         <label>Room & Guests</label>
                         <input type="text" name="hotel_travel_details" id="hotel_travel_details" placeholder="1 Room, 1 Adult" class="form-control" onclick="hotel_traveller_selection();">
-                    
+
                         <div id="hotel_traveller_selection" style="display:none;">
                             <div class="row m-0">
                                 <div class="col-6 px-2">
@@ -594,17 +580,26 @@
                 </form>
             </div>
             <div id="visa" class="tab-pane fade mt-3">
-                <form method="post" action="">
+                <form method="post" action="{{ route('visa.details') }}">
+                @csrf
                     <div class="form-group">
                         <label>For Citizens of</label>
-                        <input type="text" name="" placeholder="Ex. United kingdom" class="form-control">
+                    <select name="visaFrom" id="" class="form-control" required>
+                        @foreach(\App\Models\Visa\VisaCountries::all() as $country)
+                            <option value="{{ $country->id }}">{{ $country->countryName }}</option>
+                        @endforeach
+                    </select>
                     </div>
                     <div class="form-group">
                         <label>Traveling To</label>
-                        <input type="text" name="" placeholder="Which country?" class="form-control">
+                         <select name="visaTo" id="" class="form-control" required>
+                                                   <option value="">-- Select Destination--</option>
+                                                @foreach(\App\Models\Visa\VisaCountries::all() as $country)
+                                                    <option value="{{ $country->id }}">{{ $country->countryName }}</option>
+                                                @endforeach
+                                            </select>
                     </div>
-                    <a href="visa-requirements.php" class="btn btn-primary">Check Requirements</a>
-                    <!-- <button type="submit" class="btn btn-primary">Check Requirements</button> -->
+                    <button type="submit" class="btn btn-primary">Check Requirements</button>
                 </form>
             </div>
         </div>
@@ -622,7 +617,7 @@
                 <div id="cld__holiday__destination__banner" class="owl-carousel owl-theme owl__control__top">
                     <div class="item">
                         <a href="#">
-                            <div class="destination__wrapper" style="background:url('traveltest/../public/images/QrOnUx.jpg') no-repeat;background-size:cover;">
+                            <div class="destination__wrapper" style="background:url('traveltest/../images/QrOnUx.jpg') no-repeat;background-size:cover;">
                                 <figcaption>
                                     <h3>Cuba</h3>
                                     <span>Special offers from <span class="text-warning"><i class="las la-rupee-sign"></i>620</span></span>
@@ -632,7 +627,7 @@
                     </div>
                     <div class="item">
                         <a href="#">
-                            <div class="destination__wrapper" style="background:url('traveltest/../public/images/SaintLucia.jpg') no-repeat;background-size:cover;">
+                            <div class="destination__wrapper" style="background:url('traveltest/../images/SaintLucia.jpg') no-repeat;background-size:cover;">
                                 <figcaption>
                                     <h3>Saint Lucia</h3>
                                     <span>Special offers from <span class="text-warning"><i class="las la-rupee-sign"></i>710</span></span>
@@ -642,7 +637,7 @@
                     </div>
                     <div class="item">
                         <a href="#">
-                            <div class="destination__wrapper" style="background:url('traveltest/../public/images/aerial-view-of-fairmont.jpg') no-repeat;background-size:cover;">
+                            <div class="destination__wrapper" style="background:url('traveltest/../images/aerial-view-of-fairmont.jpg') no-repeat;background-size:cover;">
                                 <figcaption>
                                     <h3>Maldives</h3>
                                     <span>Special offers from <span class="text-warning"><i class="las la-rupee-sign"></i>948</span></span>
@@ -652,7 +647,7 @@
                     </div>
                     <div class="item">
                         <a href="#">
-                            <div class="destination__wrapper" style="background:url('traveltest/../public/images/parcarou1_720x500.jpg') no-repeat;background-size:cover;">
+                            <div class="destination__wrapper" style="background:url('traveltest/../images/parcarou1_720x500.jpg') no-repeat;background-size:cover;">
                                 <figcaption>
                                     <h3>Paris</h3>
                                     <span>Special offers from <span class="text-warning"><i class="las la-rupee-sign"></i>1020</span></span>
@@ -662,7 +657,7 @@
                     </div>
                     <div class="item">
                         <a href="#">
-                            <div class="destination__wrapper" style="background:url('traveltest/../public/images/australia-sydney-opera-house.jpg') no-repeat;background-size:cover;">
+                            <div class="destination__wrapper" style="background:url('traveltest/../images/australia-sydney-opera-house.jpg') no-repeat;background-size:cover;">
                                 <figcaption>
                                     <h3>Australia</h3>
                                     <span>Special offers from <span class="text-warning"><i class="las la-rupee-sign"></i>620</span></span>
@@ -684,7 +679,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="media align-items-center">
-                            <div class="media-left mr-3"><img src="{{ asset('public/images/best-price.png') }}" alt="best price" class="img-fluid"/></div>
+                            <div class="media-left mr-3"><img src="{{ asset('images/best-price.png') }}" alt="best price" class="img-fluid"/></div>
                             <div class="media-body">
                                 <h5>Best price guarantee</h5>
                                 <p>Find our lowest price to destinations worldwide guaranteed.</p>
@@ -695,7 +690,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="media align-items-center">
-                            <div class="media-left mr-3"><img src="{{ asset('public/images/easy-booking.png') }}" alt="easy booking"/></div>
+                            <div class="media-left mr-3"><img src="{{ asset('images/easy-booking.png') }}" alt="easy booking"/></div>
                             <div class="media-body">
                                 <h5>Easy booking</h5>
                                 <p>Search, select and save - the fastest way to book your trip.</p>
@@ -706,7 +701,7 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="media align-items-center">
-                            <div class="media-left mr-3"><img src="{{ asset('public/images/support.png') }}" alt="support"/></div>
+                            <div class="media-left mr-3"><img src="{{ asset('images/support.png') }}" alt="support"/></div>
                             <div class="media-body">
                                 <h5>24/7 Customer support</h5>
                                 <p>Receive free support from our friendly and reliable team.</p>
@@ -715,9 +710,9 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
     <div class="container mb-4">
             <div class="row">
                 <div class="col-md-12 text-center">
@@ -725,7 +720,7 @@
                     <p>Discover a different world…</p>
                 </div>
                 <div class="col-md-8 mb-3">
-                    <div class="destination__wrapper short rounded-0" style="background:url('traveltest/../public/images/family2-1.jpg') no-repeat;background-size:cover;">
+                    <div class="destination__wrapper short rounded-0" style="background:url('traveltest/../images/family2-1.jpg') no-repeat;background-size:cover;">
                     <figcaption>
         <h4 class="text-uppercase font-weight-600">Family Holidays</h4>
     <span class="d-block mb-2">Theme parks, water sports and kids clubs…keeping the whole family happy</span>
@@ -734,7 +729,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 pl-md-0">
-                    <div class="destination__wrapper short small_box rounded-0" style="background:url('traveltest/../public/images/c1aa5740.jpg') no-repeat;background-size:cover;">
+                    <div class="destination__wrapper short small_box rounded-0" style="background:url('traveltest/../images/c1aa5740.jpg') no-repeat;background-size:cover;">
                         <figcaption>
                             <h4 class="text-uppercase font-weight-600">Luxury Holidays</h4>
                             <span class="d-block mb-2">From the richest city in the world to holiday destinations</span>
@@ -743,7 +738,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3 mb-md-0 pr-md-0">
-                    <div class="destination__wrapper short small_box rounded-0" style="background:url('traveltest/../public/images/Hero-Cruise-ship.jpg') no-repeat;background-size:cover;">
+                    <div class="destination__wrapper short small_box rounded-0" style="background:url('traveltest/../images/Hero-Cruise-ship.jpg') no-repeat;background-size:cover;">
                         <figcaption>
                             <h4 class="text-uppercase font-weight-600">Cruises</h4>
                             <span class="d-block mb-2">Incredible Cruise Deals</span>
@@ -752,7 +747,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="destination__wrapper short rounded-0" style="background:url('traveltest/../public/images/Honeymoon-destination.jpg') no-repeat;background-size:cover;">
+                    <div class="destination__wrapper short rounded-0" style="background:url('traveltest/../images/Honeymoon-destination.jpg') no-repeat;background-size:cover;">
                         <figcaption>
                             <h4 class="text-uppercase font-weight-600">Honeymoon Holidays</h4>
                             <span class="d-block mb-2">Beach escapes, luxury resorts and unforgettable island paradises</span>
@@ -772,42 +767,42 @@
                 </div>
                 <div class="col-md-12 mt-2">
                     <div id="cld__home__discount__banner" class="owl-carousel owl-theme cld__home__discount__banner owl__control__top">
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount1.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount2.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount3.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount4.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount1.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount2.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount3.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        <div class="item"><a href="#"><img src="{{ asset('public/images/discount4.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
-                        
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount1.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount2.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount3.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount4.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount1.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount2.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount3.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+                        <div class="item"><a href="#"><img src="{{ asset('images/discount4.jpg') }}" alt="discount1" class="img-fluid"/></a></div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-   
+
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6">
-                <a href="#"><img src="{{ asset('public/images/Landing-page-banner-mobile.jpg') }}" alt="" class="img-fluid"/></a>
+                <a href="#"><img src="{{ asset('images/Landing-page-banner-mobile.jpg') }}" alt="" class="img-fluid"/></a>
             </div>
             <div class="col-md-6">
-                <a href="#"><img src="{{ asset('public/images/SME_Desktop-Landingpage-mobile-banner.jpg') }}" alt="" class="img-fluid"/></a>
+                <a href="#"><img src="{{ asset('images/SME_Desktop-Landingpage-mobile-banner.jpg') }}" alt="" class="img-fluid"/></a>
             </div>
         </div>
     </div>
 
 </div>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" />
 @endsection
 @section('script')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>  -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script> </head> -->
@@ -819,7 +814,7 @@
         $('#loading_small').hide();
         $('#flexiDiv').hide();
         $('#returnDateDiv').hide();
-        
+
         var path = "{{ route('searchairport') }}";
 
         // Set the Options for "Bloodhound" suggestion engine
@@ -862,7 +857,7 @@
             $("#returning_date_datetimepicker").datetimepicker("destroy");
             $('#departure_date_datetimepicker').datetimepicker({
                 pickTime: false,
-                autoclose: true, 
+                autoclose: true,
                 startDate: new Date(),
                 todayHighlight: true,
                 // minDate: new Date(),
@@ -872,8 +867,8 @@
                 // $('#departure_date_datetimepicker').hide();
                 $('#departure_date_datetimepicker').datetimepicker("hide")
             });
-            // $('#returnDateDiv').attr('returnDateDiv-data','1'); 
-        
+            // $('#returnDateDiv').attr('returnDateDiv-data','1');
+
         });
 
         $('.returning_date_datetimepickerclass').on('click',function(){
@@ -883,7 +878,7 @@
             var dep_val=$('#departure_date').val();
             $('#returning_date').val('');
             $('#returning_date').val(dep_val);
-            
+
             var newdate = dep_val.split("-").reverse().join("/");
             var datePeriode= new Date(newdate);
             var adddate=datePeriode.setDate(datePeriode.getDate() + 1);
@@ -902,7 +897,7 @@
             });
         });
 
-        
+
         $('.returning_date_datetimepickerclass').click(function(){
             // alert("hii");
             $('#one_way').removeAttr('class');
@@ -918,18 +913,18 @@
         //         $('#round_trip').removeAttr('class');
         //         $('#one_way').attr('class','active');
         //     }
-            
+
         // });
-        
+
         $('#one_way').click(function(){
             // returning_date
             $('#returning_date').val('');
             $('#round_trip').removeAttr('class');
             $('#one_way').attr('class','active');
             $('#flexiDiv').hide();
-            $('#returnDateDiv').hide(); 
-            // $('#returnDateDiv').removeAttr('returnDateDiv-data'); 
-            $('#returnDateDiv').attr('returnDateDiv-data','0'); 
+            $('#returnDateDiv').hide();
+            // $('#returnDateDiv').removeAttr('returnDateDiv-data');
+            $('#returnDateDiv').attr('returnDateDiv-data','0');
             $('#returning_date').removeAttr('required');
 
         });
@@ -938,11 +933,11 @@
             $('#flexiDiv').show();
             $('#one_way').removeAttr('class');
             $('#round_trip').attr('class','active');
-            $('#returnDateDiv').show(); 
-            $('#returnDateDiv').attr('returnDateDiv-data','1'); 
-            $('#returning_date').attr('required','required'); 
-            
-            // $("#returning_date_datetimepicker").datetimepicker("show"); 
+            $('#returnDateDiv').show();
+            $('#returnDateDiv').attr('returnDateDiv-data','1');
+            $('#returning_date').attr('required','required');
+
+            // $("#returning_date_datetimepicker").datetimepicker("show");
             var dep_val=$('#departure_date').val();
             var newdate = dep_val.split("-").reverse().join("/");
             var datePeriode= new Date(newdate);
@@ -950,18 +945,18 @@
             // // alert("hii")
             $('#returning_date_datetimepicker').datetimepicker({
                 pickTime: false,
-                autoclose: true, 
+                autoclose: true,
                 startDate: new Date(adddate),
                 todayHighlight: false,
             });
-            $("#returning_date_datetimepicker").datetimepicker("show"); 
+            $("#returning_date_datetimepicker").datetimepicker("show");
 
 
         });
         // returning_date
         // $(".returning_date_datetimepickerclass").on('click', function(event){
         //     alert("hii");
-            
+
         // });
 
         $("#adults").change(function(){
@@ -982,7 +977,7 @@
             }
             $('#flight_travel_details').removeAttr('placeholder');
             $('#flight_travel_details').attr('placeholder',val);
-            
+
         });
 
         $("#children").change(function(){
@@ -1003,7 +998,7 @@
             }
             $('#flight_travel_details').removeAttr('placeholder');
             $('#flight_travel_details').attr('placeholder',val);
-            
+
         });
         $("#infant").change(function(){
             // alert("hii");
@@ -1023,7 +1018,7 @@
             }
             $('#flight_travel_details').removeAttr('placeholder');
             $('#flight_travel_details').attr('placeholder',val);
-            
+
         });
         $("#travel_class").change(function(){
             // alert("hii");
@@ -1043,10 +1038,10 @@
             }
             $('#flight_travel_details').removeAttr('placeholder');
             $('#flight_travel_details').attr('placeholder',val);
-            
+
         });
 
-      
+
 
         $('#flight_submit').click(function(){
             // alert("hii");
@@ -1068,7 +1063,7 @@
                 //     var blankval="Please enter To";
                 //     blankCheck(blankval);
                 //     return false;
-                // }else 
+                // }else
                 // if(returning_date==""){
                 //     // alert('Please enter To');
                 //     // var blankval="Please enter Return Date";
@@ -1078,7 +1073,7 @@
                 //     document.myform.returning_date.focus ( );
                 //     // returning_date.setCustomValidity ('');
                 //     // document.getElementById('returning_date').setCustomValidity('');
-                //     // $("#returning_date_datetimepicker").datetimepicker("show"); 
+                //     // $("#returning_date_datetimepicker").datetimepicker("show");
 
                 //     // blankCheck(blankval);
                 //     return false;
@@ -1152,7 +1147,7 @@
 </script>
 
     <!-- start google location api -->
-    
+
 <script src="https://maps.google.com/maps/api/js?key=<?php echo app('App\Http\Controllers\GoogleAPIController')->GoogleAPIKey();?>"></script>
 <script>
     $( document ).ready(function() {
@@ -1163,7 +1158,7 @@
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else { 
+        } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
@@ -1174,12 +1169,12 @@
         // alert("lat : "+lat);
         // alert("long : "+long);
         var point = new google.maps.LatLng(lat, long);
-        new google.maps.Geocoder().geocode( {'latLng': point}, 
-        function (results, status) { 
+        new google.maps.Geocoder().geocode( {'latLng': point},
+        function (results, status) {
             // alert(results)
             // var obj=JSON.parse(results);
             var obj=JSON.stringify(results);
-            
+
             // alert(obj)
             // console.log(obj)
             for(i=0; i < results.length; i++){
@@ -1274,7 +1269,7 @@
             $("#check_in_datetimepicker").datetimepicker("destroy");
             $('#check_in_datetimepicker').datetimepicker({
                 pickTime: false,
-                autoclose: true, 
+                autoclose: true,
                 startDate: new Date(newdate),
                 todayHighlight: true,
                 // minDate: new Date('2021/09/10'),
@@ -1284,8 +1279,8 @@
                 // $('#departure_date_datetimepicker').hide();
                 $('#check_in_datetimepicker').datetimepicker("hide")
             });
-            // $('#returnDateDiv').attr('returnDateDiv-data','1'); 
-        
+            // $('#returnDateDiv').attr('returnDateDiv-data','1');
+
         });
 
         $('.check_out_datetimepickerclass').on('click',function(){
@@ -1304,7 +1299,7 @@
             var dateFormated1 = dateFormated.split("-").reverse().join("-");
             $('#check_out').val('');
             $('#check_out').val(dateFormated1);
-            
+
             var newdate = dateFormated1.split("-").reverse().join("/");
             // alert(newdate);
             var datePeriode= new Date(newdate);
@@ -1370,8 +1365,8 @@
 
             // div show hide function
             if (hotel_room==1) {
-                //    alert(hotel_room) 
-                
+                //    alert(hotel_room)
+
                 // room2_hotel_adults
                 // room2_hotel_child
                 // room2_hotel_infant
@@ -1403,8 +1398,8 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==2) {
-                //    alert(hotel_room) 
-                
+                //    alert(hotel_room)
+
 
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
@@ -1432,7 +1427,7 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==3) {
-                //    alert(hotel_room) 
+                //    alert(hotel_room)
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
                 $('#room2HeadingDiv').show();
@@ -1457,14 +1452,14 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==4) {
-                //    alert(hotel_room) 
+                //    alert(hotel_room)
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
                 $('#room2HeadingDiv').show();
                 $('#room2AdultDiv').show();
                 $('#room2ChildDiv').show();
                 $('#room2InfantDiv').show();
-                
+
                 $('#room3_hotel_adults').val('1');
                 $('#room3AdultDiv').attr('data-room3-div','1');
                 $('#room3HeadingDiv').show();
@@ -1480,7 +1475,7 @@
                 $('#room4InfantDiv').show();
             }
 
-            
+
         });
 
         $("#room1_hotel_adults").change(function(){
@@ -1501,7 +1496,7 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
 
         $("#room1_hotel_child").change(function(){
@@ -1522,7 +1517,7 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
         $("#room1_hotel_infant").change(function(){
             // alert("hii");
@@ -1542,9 +1537,9 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
-        
+
 
         $('#hotel_submit').click(function(){
             // alert("hotel_submit");
@@ -1581,16 +1576,34 @@
                 }
             }
             // alert(check_in+" - "+check_out)
-            if(check_in!='' && check_out!=''){
-                if (check_in==check_out) {
-                    alert("Check in date and check out date can not be same");
-                    return false;
-                }else if(city_name!='' && check_in!='' && check_out!=''){
-                    $('#loading').show();
-                }
-            }
+            //if(check_in!='' && check_out!=''){
+                //if (check_in==check_out) {
+                 //   alert("Check in date and check out date can not be same");
+               //     return false;
+              //  }else if(city_name!='' && check_in!='' && check_out!=''){
+              //      $('#loading').show();
+              //  }
+           // }
         });
     });
+</script>
+
+
+<script>
+$(function() {
+  $('input[name="checkInOut"]').daterangepicker({
+    opens: 'left',
+    startDate: moment().startOf('hour'),
+    endDate: moment().startOf('hour').add(24, 'hour'),
+    locale: {
+          format: 'DD-MM-YYYY'
+        }
+  },
+   function(start, end, label) {
+    //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  }
+  );
+});
 </script>
         <!-- end hotel section -->
 @endsection

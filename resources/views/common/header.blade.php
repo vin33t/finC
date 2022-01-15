@@ -5,13 +5,13 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="las la-bars"></i>
                           </button>
-                        <a class="navbar-brand logo" href="{{route('index')}}"><img src="{{ asset('public/images/logo.png') }}" alt="logo" class="img-fluid"/></a>
+                        <a class="navbar-brand logo" href="{{route('index')}}"><img src="{{ asset('images/logo.png') }}" alt="logo" class="img-fluid"/></a>
 
                         <div class="d-block d-md-none ml-auto">
                             <a href="{{route('contactus')}}" class="btn btn-sm btn-default"><i class="las la-headset"></i> Support</a>
                             <a href="{{route('logout')}}" class="btn btn-sm btn-primary">Sign Out</a>
                         </div>
-                        
+
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav  nav-pills" >
                                 <li class="nav-item active">
@@ -56,13 +56,13 @@
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <i class="las la-bars"></i>
                           </button>
-                        <a class="navbar-brand logo" href="{{route('index')}}"><img src="{{ asset('public/images/logo.png') }}" alt="logo" class="img-fluid"/></a>
+                        <a class="navbar-brand logo" href="{{route('index')}}"><img src="{{ asset('images/logo.png') }}" alt="logo" class="img-fluid"/></a>
 
                         <div class="d-block d-md-none ml-auto">
                             <a href="{{route('contactus')}}" class="btn btn-sm btn-default"><i class="las la-headset"></i> Support</a>
                             <a href="{{route('login')}}" class="btn btn-sm btn-primary">Sign In</a>
                         </div>
-                        
+
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav  nav-pills" >
                                 <li class="nav-item active">

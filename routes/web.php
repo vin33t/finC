@@ -99,12 +99,18 @@ Route::get('/testhotel',[App\Http\Controllers\hotel\TestController::class,'Test'
     Route::post('/passwordChange',[App\Http\Controllers\user\HomeController::class,'ChangePassword'])->name('passwordChange');
     Route::get('/bookinghotels',[App\Http\Controllers\user\HomeController::class,'BookingHotels'])->name('bookinghotels');
     Route::get('/generateinvoicehotel',[App\Http\Controllers\user\HomeController::class,'HotelInvoice'])->name('generateinvoicehotel');
-    
+
     Route::get('/forgotpassword',[App\Http\Controllers\user\LoginController::class,'ShowForget'])->name('forgotpassword');
     Route::post('/forgotpassword',[App\Http\Controllers\user\LoginController::class,'Forget'])->name('forgotpassword');
     Route::get('/resetpassword/{emailid?}',[App\Http\Controllers\user\LoginController::class,'ShowReset'])->name('resetpassword');
     Route::post('/resetpassword',[App\Http\Controllers\user\LoginController::class,'Reset'])->name('resetpassword');
-    
 
-//        send Mail 
+
+//        send Mail
 Route::get('/sendmail',[App\Http\Controllers\hotel\TestController::class,'Send'])->name('sendmail');
+
+
+
+Route::prefix('visa')->group(function() {
+    Route::post('details',[App\Http\Controllers\visa\VisaController::class,'details'])->name('visa.details');
+});

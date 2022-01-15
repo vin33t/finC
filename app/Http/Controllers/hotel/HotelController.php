@@ -9,6 +9,10 @@ use App\Models\HotelCities;
 use App\Models\HotelCountries;
 use DB;
 use App\Models\HotelCurrency;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class HotelController extends Controller
 {
@@ -16,6 +20,8 @@ class HotelController extends Controller
         // return "hii";
         // return $request;
         $currency=$request->currency;
+        $check_in = explode(' - ',$request->checkInOut)[0];
+        $check_out = explode(' - ',$request->checkInOut)[1];
         // return $currency;
         if(isset(explode('(',$request->city_name)[0]) && isset(explode('(',$request->city_name)[1])){
             $city_name =  str_replace(')','',explode('(',$request->city_name)[0]);
@@ -24,17 +30,17 @@ class HotelController extends Controller
             // return "addFrom";
             return redirect()->route('errorPage')->with('searcherror','searcherror');
         }
-        
+
         // return $city_name;
         $cityId=DB::table('hotel_cities')->where('country_code',$country_code)->where('city_name',$city_name)->value('city_id');
         // return $cityId;
-        $checkinDate = Carbon::parse($request->check_in)->format('Y-m-d');
-        $checkoutDate = Carbon::parse($request->check_out)->format('Y-m-d');
+        $checkinDate = Carbon::parse($check_in)->format('Y-m-d');
+        $checkoutDate = Carbon::parse($check_out)->format('Y-m-d');
 
         $room=$request->hotel_room;
         // return $room;
         $xmldata='';
-        for ($i=1; $i <= $room; $i++) { 
+        for ($i=1; $i <= $room; $i++) {
             // echo $i;
             // echo "</br>";
             // room1_hotel_adults
@@ -52,12 +58,12 @@ class HotelController extends Controller
             if($request->$room_infant>0){
                 $xmldata2='<ChildAge>'.$request->$room_infant.'</ChildAge>';
             }
-            
+
             $xmldata0='<Room>
                 <NumAdults>'.$request->$room_adult.'</NumAdults>
                 <Children>';
 
-                $xmldata3='</Children>
+            $xmldata3='</Children>
             </Room>';
             $xmldata.=$xmldata0.$xmldata1.$xmldata2.$xmldata3;
         }
@@ -85,7 +91,7 @@ class HotelController extends Controller
         //         <ChildAge>'.$infant.'</ChildAge>
         //     </Children>';
         // }else{
-        //     $children_xml='';  
+        //     $children_xml='';
         // }
         // return $children_xml;
 
@@ -114,7 +120,6 @@ class HotelController extends Controller
                         <AvailableOnly>0</AvailableOnly>
                     </Body>
                 </Request>';
-        // return $xml;
 
         $ch = curl_init($url);
 
@@ -125,94 +130,48 @@ class HotelController extends Controller
 
         $return = curl_exec($ch);
         curl_close($ch);
-        // return $return;
         $object =app('App\Http\Controllers\XMlToParseDataController')->XMlToJSON($return);
-        // return $object;
-        // $data=collect();
         $data=[];
         $data1=collect();
         foreach($object as $json){
-            // print_r($json);
-            // echo "<br/><br/><br/>";
-            // return $json['Head'];
-            // return $json['Body'];
-            // return $json['Body']['Hotels'];
-
             if(array_key_exists('Error',$json['Body'])){
-                // return $json['Body']['Error'];
-                // return $data;
             }else if(array_key_exists('Hotels',$json['Body'])){
                 $hotels=$json['Body']['Hotels'];
-                // return $hotels;
-                
-                // return $hotels['Hotel'];
-                // return count($hotels);
+
                 if(count($hotels)>0){
-                    // return
                     if(array_key_exists('HotelId',$hotels['Hotel'])){
                         array_push($data,$hotels['Hotel']);
                         $data1->push(['Hotel' => $data]);
                     }else{
                         $data1->push(['Hotel' => Collect($hotels['Hotel'])]);
-                        //array_push($data1,$hotels);
                     }
-                    
-                }
-                // array_push($data,$hotels);
-            }
-            
-        }
-        // $arr1=["daa1","daa12"];
-        // array_push($data,$arr1);
-        // $data->push($arr1);
 
-        // return $data1;
+                }
+            }
+
+        }
         $allhotelid=[];
         $pricearr=[];
-        // return count($data[0]);
-        // if(count($data[0])==1){
-        //     // return $data[0];
-        //     $hotel_id=$data[0]['Hotel']['HotelId'];
-        //     array_push($allhotelid,$hotel_id);
-        // }else{
         if(count($data1)>0){
             foreach ($data1[0] as $value2) {
-                // return count($value2);
-                // print_r($value2 ['HotelId']);
-                for ($i=0; $i < count($value2); $i++) { 
-                    // echo $i;
-                    // return $value2[$i];
-                    // print_r($value2[$i]['Options']['Option'][0]['TotalPrice']);
-                    // return $value2[$i]['Options']['Option'][0]['TotalPrice'];
-                    // return $value2[$i]['HotelId'];
+                for ($i=0; $i < count($value2); $i++) {
                     $hotel_id=$value2[$i]['HotelId'];
                     $price=isset($value2[$i]['Options']['Option'][0]['TotalPrice'])?json_decode($value2[$i]['Options']['Option'][0]['TotalPrice']):json_decode($value2[$i]['Options']['Option']['TotalPrice']);
-                    // $price=isset($value2[$i]['Options']['Option'][0]['TotalPrice'])?(json_decode($value2[$i]['Options']['Option'][0]['TotalPrice'])*100):(json_decode($value2[$i]['Options']['Option']['TotalPrice'])*100);
                     array_push($allhotelid,$hotel_id);
                     array_push($pricearr,$price);
-                    // return $value2[$i]['Options'];
-                    // return $value2[$i]['Options']['Option'][0];
-                    // print_r($value2[$i]);
-                    // echo "<br/><br/><br/>";
                 }
-            
+
             }
         }
-        // return $allhotelid;
-        sort($pricearr);
-        // $pricearr = collect($pricearr)->sortBy('price')->toArray();
-        // return $pricearr;
 
-        // return krsort($pricearr);
+        sort($pricearr);
+
         $hotelDetails=[];
         if(count($allhotelid)>0){
             $HotelIds='';
             foreach($allhotelid as $allhotelids){
-                // echo $allhotelids;
-                // echo "--";
                 $HotelIds.='<HotelId>'.$allhotelids.'</HotelId>';
             }
-            // return $HotelIds;
             $url = "http://xmldemo.travellanda.com/xmlv1";
             $xml = '<?xml version="1.0" encoding="UTF-8"?>
                     <Request>
@@ -227,8 +186,8 @@ class HotelController extends Controller
                             </HotelIds>
                         </Body>
                     </Request>';
-    
-    
+
+
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
@@ -254,7 +213,7 @@ class HotelController extends Controller
                         $hotelDetails= $json['Body']['Hotels']['Hotel'];
                         // array_push($hotelDetails,$hotels);
                     }
-                    
+
                 }
             }
             // return $hotelDetails;
@@ -268,7 +227,7 @@ class HotelController extends Controller
         $allfacilities=[];
         foreach($hotelDetails as $hotelDetailss){
             // return $hotelDetailss;
-            // for ($i=0; $i < count($hotelDetailss); $i++) { 
+            // for ($i=0; $i < count($hotelDetailss); $i++) {
             //     return $hotelDetailss['Facilities']['Facility'];
             // }
             // echo $hotelDetailss['HotelName'];
@@ -276,42 +235,59 @@ class HotelController extends Controller
             // return $hotelDetailss['Facilities']['Facility'];
             // echo $hotelDetailss['Images']['Image'][0];
             if(isset($hotelDetailss['Facilities']['Facility'])){
-            foreach($hotelDetailss['Facilities']['Facility'] as $facility){
-                // print_r($facility);
-                // echo "<br/>";
-                if(is_array($facility)){
-                    if($facility['FacilityType'] =='Hotel Facilities'){
-                        $Facility=$facility['FacilityName'];
-                        array_push($allfacilities,$Facility);
+                foreach($hotelDetailss['Facilities']['Facility'] as $facility){
+                    // print_r($facility);
+                    // echo "<br/>";
+                    if(is_array($facility)){
+                        if($facility['FacilityType'] =='Hotel Facilities'){
+                            $Facility=$facility['FacilityName'];
+                            array_push($allfacilities,$Facility);
+                        }
+                    }else{
+                        $cateory=$hotelDetailss['Facilities']['Facility']['FacilityName'];
+                        array_push($allfacilities,$cateory);
+                        // print_r( $key." -- ".$facility);
+                        // echo $hotelDetailss['Facilities']['Facility']['FacilityName'];
+                        // echo "<br/>";
                     }
-                }else{
-                    $cateory=$hotelDetailss['Facilities']['Facility']['FacilityName'];
-                    array_push($allfacilities,$cateory);
-                    // print_r( $key." -- ".$facility);
-                    // echo $hotelDetailss['Facilities']['Facility']['FacilityName'];
-                    // echo "<br/>"; 
                 }
-            }
             }
 
             // if($facility['FacilityType'] =='Hotel Facilities'){}
 
-            
+
         }
         $allfacilities=array_unique($allfacilities);
-        // return "hii";
+
         // return $data1;
         // $vl="2.5";
         // return json_decode($vl);
         // return $hotelDetails;
+//        $data1 = $this->paginate($data1[0]['Hotel']);
+        //dd($data1);
+        //	$data1[0]['Hotel'] = $this->paginate($data1[0]['Hotel']);
+        //dd($data1);
+//        foreach($data1 as $data){
+//            dd($data);
+//        }
+//        dd($data1);
+//        dd($hotelDetails);
         $hotel_currency=HotelCurrency::get();
         return view('hotel.hotels',[
             'hotels'=>$data1,
             'hotelDetails'=>$hotelDetails,
             'searched'=>$request,
-            'allfacilities'=>$allfacilities,
+            'allfacilities'=>array_slice($allfacilities,0,8),
             'pricearr'=>$pricearr,
             'hotel_currency'=>$hotel_currency
         ]);
     }
+    function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 }
+
+

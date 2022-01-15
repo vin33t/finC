@@ -7,7 +7,7 @@
             <div class="row align-items-center">
                 <div class="col-md col-6">
                     <small class="text-muted d-block mb-1">Hotel In</small>
-                    <h6 class="font-weight-600 mb-0"><?php 
+                    <h6 class="font-weight-600 mb-0"><?php
                     // use DB;
                     $city_name =  str_replace(')','',explode('(',$searched->city_name)[0]);
                     $country_code =  str_replace(')','',explode('(',$searched->city_name)[1]);
@@ -74,7 +74,7 @@
                         <div class="form-group">
                             <label>Room & Guests</label>
                             <input type="text" name="hotel_travel_details" id="hotel_travel_details" placeholder="{{$searched->hotel_room}} Room, <?php echo $searched->room1_hotel_adults." Adult"; if($searched->room1_hotel_child>0){echo ", ".$searched->room1_hotel_child." Yrs Child 1";} if($searched->room1_hotel_infant>0){echo ", ".$searched->room1_hotel_infant." Yrs Child 2";} ?>" class="form-control" onclick="hotel_traveller_selection();">
-                        
+
                             <div id="hotel_traveller_selection" style="display:none;">
                                 <div class="row m-0">
                                     <div class="col-6 px-2">
@@ -88,7 +88,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="col-6 px-2">
                                         <div class="form-group">
                                             <label>Adults <small>(18+ yrs)</small></label>
@@ -390,6 +390,7 @@
             <div class="row">
                 @if(count($hotels) > 0)
 
+
                 <div class="col-lg-3 filters_wrapper">
                     <div class="card">
                         <h4 class="font-weight-600 m-0">Filter Result <span class="d-inline-block d-lg-none  filter-open float-right"><i class="las la-times"></i></span></h4>
@@ -433,46 +434,46 @@
                             <!-- <label for="customRange"><i class="fas fa-rupee-sign"></i> 26,000/-</label>
                             <input type="range" class="custom-range" id="customRange" name="points1"> -->
                             <label for="onwwayRange" id="amount"><i class="las la-pound-sign"></i>
-                            <?php  
+                            <?php
                                 // echo $pricearr[0];
                                 // echo $pricearr[count($pricearr)-1];
                                 echo number_format($pricearr[0],2,'.','');
                                 echo ' - <i class="las la-pound-sign"></i>';
-                                if(isset($searched->slider_order)){ 
+                                if(isset($searched->slider_order)){
                                     echo number_format(($searched->slider_order/100),2,'.','') ;
-                                }else{ 
+                                }else{
                                     echo number_format($pricearr[count($pricearr)-1],2,'.','');
                                 }
                             ?></label>
-                            <input type="range" class="custom-range" id="onwwayRange" name="onwwayRange" 
-                            min="<?php 
+                            <input type="range" class="custom-range" id="onwwayRange" name="onwwayRange"
+                            min="<?php
                                 // echo number_format($pricearr[0],2,'.','');
                                 echo ($pricearr[0] * 100);
-                            ?>" 
-                            max="<?php 
-                                // echo number_format($pricearr[count($pricearr)-1],2,'.','');  
-                                                            
-                                echo ($pricearr[count($pricearr)-1] * 100);      
-                            ?>" 
-                            value="<?php 
+                            ?>"
+                            max="<?php
+                                // echo number_format($pricearr[count($pricearr)-1],2,'.','');
+
+                                echo ($pricearr[count($pricearr)-1] * 100);
+                            ?>"
+                            value="<?php
                             // echo number_format($pricearr[count($pricearr)-1],2,'.','');
                                 if(isset($searched->slider_order)){
                                     echo $searched->slider_order;
-                                }else{  
+                                }else{
                                     echo ($pricearr[count($pricearr)-1] * 100);
                                 }
                             ?>">
-                            <input type="hidden" class="custom-range" id="onwwayRange_minprice" name="onwwayRange_minprice" value="<?php 
+                            <input type="hidden" class="custom-range" id="onwwayRange_minprice" name="onwwayRange_minprice" value="<?php
                                 echo ($pricearr[0] * 100);
                             ?>">
-                            <input type="hidden" class="custom-range" id="onwwayRange_maxprice" name="onwwayRange_maxprice" value="<?php 
+                            <input type="hidden" class="custom-range" id="onwwayRange_maxprice" name="onwwayRange_maxprice" value="<?php
                                 if(isset($searched->slider_order)){
                                     echo $searched->slider_order;
                                 }else{
-                                    echo ($pricearr[count($pricearr)-1] * 100); 
-                                }                               
+                                    echo ($pricearr[count($pricearr)-1] * 100);
+                                }
                             ?>">
-                            
+
                         </div>
                         <!-- <div class="filter-set">
                             <h6 class="font-weight-600">Hotel types </h6>
@@ -509,7 +510,7 @@
                                 <label class="custom-control-label" for="Facility<?php echo str_replace("'",'',str_replace(')','',str_replace('(','',str_replace(' ','',str_replace('/','',$allfacility))))); ?>">{{$allfacility}}</label>
                             </div>
                             @endforeach
-                            
+
                         </div>
                     </div>
                 </div>
@@ -568,8 +569,8 @@
                             @endif
                         @endif
                         <!-- {{$hotel[$i]['HotelId']}} -->
-                        <div class="package-devider GlobalDiv Rating{{ is_array($hotel[$i]['StarRating'])?'':json_decode($hotel[$i]['StarRating'])}} hotelName_<?php echo str_replace("'","",str_replace(',','',str_replace(' ','',$hotel[$i]['HotelName'])));?> 
-                            <?php 
+                        <div class="package-devider GlobalDiv Rating{{ is_array($hotel[$i]['StarRating'])?'':json_decode($hotel[$i]['StarRating'])}} hotelName_<?php echo str_replace("'","",str_replace(',','',str_replace(' ','',$hotel[$i]['HotelName'])));?>
+                            <?php
                             if(isset($hotelDetails[$i]['Facilities']['Facility'])){
                             foreach($hotelDetails[$i]['Facilities']['Facility'] as $facility){
                                 if(is_array($facility)){
@@ -578,13 +579,13 @@
                                     }
                                 }else{
                                     $cateory=$hotelDetails[$i]['Facilities']['Facility']['FacilityName'];
-                                    echo 'Facility'.str_replace("'",'',str_replace(')','',str_replace('(','',str_replace(' ','',str_replace('/','',$cateory)))))." ";                                   
+                                    echo 'Facility'.str_replace("'",'',str_replace(')','',str_replace('(','',str_replace(' ','',str_replace('/','',$cateory)))))." ";
                                 }
                             }
                             }
                             ?>
-                            
-                            SortPrice{{($i+1)}} SortRating{{($i+1)}} SortName{{($i+1)}}" 
+
+                            SortPrice{{($i+1)}} SortRating{{($i+1)}} SortName{{($i+1)}}"
                             data-GlobalDiv="1" data-price-div="{{isset($hotel[$i]['Options']['Option'][0]['TotalPrice'])?json_decode($hotel[$i]['Options']['Option'][0]['TotalPrice']):json_decode($hotel[$i]['Options']['Option']['TotalPrice'])}}"
                             data-rating-div="{{ is_array($hotel[$i]['StarRating'])?'':json_decode($hotel[$i]['StarRating'])}}"
                             data-hotelname-div="{{substr($hotel[$i]['HotelName'],0,2)}}">
@@ -655,7 +656,7 @@
                                                         @endif
                                                         <?php $count++; ?>
                                                     @endif
-                                                
+
                                                 @endif
                                                 @endforeach
                                                 @endif
@@ -721,7 +722,7 @@
                                                 </form>
                                                 <!-- <a href="javascript:void(0)" class="d-block" data-toggle="collapse" data-target="#all-amenities-description{{$hotel[$i]['HotelId']}}">More Details <i class="las la-angle-down"></i></a> -->
                                             </div>
-                                            
+
                                             <!-- </p> -->
                                         </div>
                                     </div>
@@ -732,7 +733,7 @@
                                     <h4 class="mb-0 h3 font-weight-600">
                                         <span class="text-danger">
                                             <!-- <i class="las la-pound-sign"></i> -->
-                                            <?php 
+                                            <?php
                                                echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                                echo " ";
                                             //    echo "<b>".$val."</b> ";
@@ -752,7 +753,7 @@
                                         <input type="text" name="city_name" value="{{$searched->city_name}}" hidden>
                                         <input type="text" name="hotel_room" value="{{$searched->hotel_room}}" hidden>
                                         <input type="text" name="currency" value="{{$searched->currency}}" hidden>
-                                        
+
                                         <input type="text" name="room1_hotel_adults" value="{{$searched->room1_hotel_adults}}" hidden>
                                         <input type="text" name="room1_hotel_child" value="{{$searched->room1_hotel_child}}" hidden>
                                         <input type="text" name="room1_hotel_infant" value="{{$searched->room1_hotel_infant}}" hidden>
@@ -774,7 +775,7 @@
                             </div>
                             <hr>
                         </div>
-                        
+
                         @endfor
                         @endforeach
                         </div>
@@ -851,7 +852,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="border-left col-md-3 mt-3 mt-md-0 text-center text-md-left">
                                 <del class="text-muted"><i class="las la-pound-sign"></i>25.30</del><br>
                                 <h4 class="mb-0 h3 font-weight-600"><span class="text-danger"><i class="las la-pound-sign"></i>30.73</span></h4>
@@ -891,7 +892,7 @@
                                 </div>
                             </div>
                         </div>
-                            
+
                             <div class="border-left col-md-3 mt-3 mt-md-0 text-center text-md-left">
                                 <del class="text-muted"><i class="las la-pound-sign"></i>34.00</del><br>
                                 <h4 class="mb-0 h3 font-weight-600"><span class="text-danger"><i class="las la-pound-sign"></i>32.84</span></h4>
@@ -932,7 +933,7 @@
         $('#'+room2AdultDiv).hide();
         $('#'+room2ChildDiv).hide();
         $('#'+room2InfantDiv).hide();
-        
+
     }
 </script>
 <script>
@@ -981,7 +982,7 @@
             $("#check_out_datetimepicker").datetimepicker("destroy");
             $('#check_in_datetimepicker').datetimepicker({
                 pickTime: false,
-                autoclose: true, 
+                autoclose: true,
                 startDate: new Date(),
                 todayHighlight: true,
                 // minDate: new Date(),
@@ -991,8 +992,8 @@
                 // $('#departure_date_datetimepicker').hide();
                 $('#check_in_datetimepicker').datetimepicker("hide");
             });
-            // $('#returnDateDiv').attr('returnDateDiv-data','1'); 
-        
+            // $('#returnDateDiv').attr('returnDateDiv-data','1');
+
         });
 
         $('.check_out_datetimepickerclass').on('click',function(){
@@ -1011,7 +1012,7 @@
             var dateFormated1 = dateFormated.split("-").reverse().join("-");
             $('#check_out').val('');
             $('#check_out').val(dateFormated1);
-            
+
             var newdate = dateFormated1.split("-").reverse().join("/");
             // alert(newdate);
             var datePeriode= new Date(newdate);
@@ -1058,8 +1059,8 @@
 
             // div show hide function
             if (hotel_room==1) {
-                //    alert(hotel_room) 
-                
+                //    alert(hotel_room)
+
                 // room2_hotel_adults
                 // room2_hotel_child
                 // room2_hotel_infant
@@ -1091,8 +1092,8 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==2) {
-                //    alert(hotel_room) 
-                
+                //    alert(hotel_room)
+
 
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
@@ -1120,7 +1121,7 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==3) {
-                //    alert(hotel_room) 
+                //    alert(hotel_room)
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
                 $('#room2HeadingDiv').show();
@@ -1145,14 +1146,14 @@
                 $('#room4InfantDiv').hide();
             }
             if (hotel_room==4) {
-                //    alert(hotel_room) 
+                //    alert(hotel_room)
                 $('#room2_hotel_adults').val('1');
                 $('#room2AdultDiv').attr('data-room2-div','1');
                 $('#room2HeadingDiv').show();
                 $('#room2AdultDiv').show();
                 $('#room2ChildDiv').show();
                 $('#room2InfantDiv').show();
-                
+
                 $('#room3_hotel_adults').val('1');
                 $('#room3AdultDiv').attr('data-room3-div','1');
                 $('#room3HeadingDiv').show();
@@ -1168,7 +1169,7 @@
                 $('#room4InfantDiv').show();
             }
 
-            
+
         });
 
         $("#room1_hotel_adults").change(function(){
@@ -1189,7 +1190,7 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
 
         $("#room1_hotel_child").change(function(){
@@ -1210,7 +1211,7 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
         $("#room1_hotel_infant").change(function(){
             // alert("hii");
@@ -1230,9 +1231,9 @@
             }
             $('#hotel_travel_details').removeAttr('placeholder');
             $('#hotel_travel_details').attr('placeholder',val);
-            
+
         });
-        
+
 
         $('#hotel_submit').click(function(){
             // alert("hotel_submit");
@@ -1289,7 +1290,7 @@
             $('.hotelName_'+val).attr("data-GlobalDiv", "1");
             }else{
                 $(".GlobalDiv").attr("data-GlobalDiv", "1");
-                $(".GlobalDiv").show();  
+                $(".GlobalDiv").show();
             }
         });
 
@@ -1300,7 +1301,7 @@
             if(sort_by_val=='Price_Low_to_High'){
                 // alert(sort_by_val);
                 var pricearray=[];
-                var pricearray=<?php 
+                var pricearray=<?php
                 $aaa=[];
                 $pricearray=array_unique(isset($pricearray)?$pricearray:[]);
                 foreach($pricearray as $val1){
@@ -1323,7 +1324,7 @@
             }else if(sort_by_val=='Price_High_to_Low'){
                 // alert(sort_by_val);
                 var pricearray=[];
-                var pricearray=<?php 
+                var pricearray=<?php
                 $aaa=[];
                 $pricearray=array_unique(isset($pricearray)?$pricearray:[]);
                 foreach($pricearray as $val1){
@@ -1346,7 +1347,7 @@
             }else if(sort_by_val=='Rating_Low_to_High'){
                 // alert(sort_by_val);
                 var datarating=[];
-                var datarating=<?php 
+                var datarating=<?php
                 $aaa=[];
                 $datarating=array_unique(isset($datarating)?$datarating:[]);
                 foreach($datarating as $val1){
@@ -1369,7 +1370,7 @@
             }else if(sort_by_val=='Rating_High_to_Low'){
                 // alert(sort_by_val);
                 var datarating=[];
-                var datarating=<?php 
+                var datarating=<?php
                 $aaa=[];
                 $datarating=array_unique(isset($datarating)?$datarating:[]);
                 foreach($datarating as $val1){
@@ -1393,7 +1394,7 @@
             else if(sort_by_val=='Hotel_Name_A_to_Z'){
                 // alert(sort_by_val);
                 var datahotelname=[];
-                var datahotelname=<?php 
+                var datahotelname=<?php
                 $aaa=[];
                 $datahotelname=array_unique(isset($datahotelname)?$datahotelname:[]);
                 foreach($datahotelname as $val1){
@@ -1420,7 +1421,7 @@
             else if(sort_by_val=='Hotel_Name_Z_to_A'){
                 // alert(sort_by_val);
                 var datahotelname=[];
-                var datahotelname=<?php 
+                var datahotelname=<?php
                 $aaa=[];
                 $datahotelname=array_unique(isset($datahotelname)?$datahotelname:[]);
                 foreach($datahotelname as $val1){
@@ -1442,11 +1443,11 @@
                     }
                 }
             }
-            
+
         });
 
 
-        
+
     });
     function filter1(val){
         var checked_val=$("input[name='Facility']").val();
@@ -1459,8 +1460,8 @@
 
         //     // $(".GlobalDiv").attr("data-GlobalDiv", "0")
         //     // $(".GlobalDiv").hide();
-        //     // $("."+checked_val).show(); 
-        //     // $("."+checked_val).attr("data-GlobalDiv", "1") ; 
+        //     // $("."+checked_val).show();
+        //     // $("."+checked_val).attr("data-GlobalDiv", "1") ;
         //     if($(this).prop("checked") == true){
         //         console.log("Checkbox is checked.");
         //     }
@@ -1473,15 +1474,15 @@
         //     // $("."+this.value).attr("data-GlobalDiv", "0")
         //     // $("."+this.value).hide();
 
-                
+
         // });
         // alert('hii');
         var SearchCount=0;
         var count=0;
-     
+
         $(".GlobalDiv").attr("data-GlobalDiv", "0");
         $(".GlobalDiv").hide();
-       
+
         var arr=[];
 
         var Facility=0;
@@ -1496,7 +1497,7 @@
         //     arr.push("Facility");
         // }
         // alert(arr);
-       
+
 
         if(Facility==0)
         {
@@ -1506,15 +1507,15 @@
     }
     function filter()
     {
-        // if ($("."+this.value).attr("data-GlobalDiv")==1) 
+        // if ($("."+this.value).attr("data-GlobalDiv")==1)
         // $(".GlobalDiv").attr("data-GlobalDiv", "0")
         var SearchCount=0;
         var count=0;
         var globalDivshowcount=[];
-     
+
         $(".GlobalDiv").attr("data-GlobalDiv", "0");
         $(".GlobalDiv").hide();
-       
+
         var arr=[];
         // var Departure=0;
         // $('input[name="Departure"]:checked').each(function() {
@@ -1539,16 +1540,16 @@
         if (Rating==1) {
             arr.push("Rating");
         }
-          
+
         $.each(arr, function( index, d ) {
             SearchCount=1;
             count+=1;
-            
+
             $('input[name="'+d+'"]:checked').each(function() {
                 // alert(this.value);
                 if (SearchCount==count) {
-                    $("."+this.value).show(); 
-                    $("."+this.value).attr("data-GlobalDiv", "1") ; 
+                    $("."+this.value).show();
+                    $("."+this.value).attr("data-GlobalDiv", "1") ;
                     // alert(this.value);
                     // alert(d);
                     var rating_is=$("."+this.value).attr("data-GlobalDiv") ;
@@ -1558,16 +1559,16 @@
                     }else{
                         globalDivshowcount.push(rating_is);
                     }
-                    
-                        
-                    
+
+
+
                 }
-                else if(count>SearchCount) 
+                else if(count>SearchCount)
                 {
-                    if ($("."+this.value).attr("data-GlobalDiv")=="1") 
+                    if ($("."+this.value).attr("data-GlobalDiv")=="1")
                     {
-                        $("."+this.value).show();     
-                    }  
+                        $("."+this.value).show();
+                    }
                 }
             });
             $('input[name="'+d+'"]:not(:checked)').each(function() {
@@ -1575,13 +1576,13 @@
                 // $('#msgDiv').empty();
                 // $('#msgDiv').append("No Hotel Found");
                 var globalDivcount=(globalDivcount + 1);
-                
+
                 $("."+this.value).attr("data-GlobalDiv", "0")
                 $("."+this.value).hide();
 
-                    
+
             });
-          
+
         });
         // alert(phpglobaldiv);
         // alert(globalDivcount);
@@ -1609,7 +1610,7 @@
     // function hotelNameFilter(name){
     //     alert(name);
     // }
-        
+
 
     // price slider
     var slider = document.getElementById("onwwayRange");
@@ -1648,7 +1649,7 @@
             // var newurl=newurl+'&slider_order='+var_val;
         }
 
-        
+
         // window.location.assign(newurl);
         $('#hotelForm').submit();
 
