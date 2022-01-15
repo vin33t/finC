@@ -14,4 +14,8 @@ class CountryPair extends Model
     public function VisaToCountry(){
         return $this->hasMany('App\Models\Visa\CountryPair','');
     }
+
+    public function Visa(){
+        return $this->hasMany('App\Models\Visa\CountryPairVisa', 'visaCountryPairId');
+    }
 }

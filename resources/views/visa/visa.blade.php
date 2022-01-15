@@ -12,18 +12,26 @@
                         <h3 class="display-9">Travelling from <strong>{{ $visaFrom->countryName }}</strong></h3>
                         <p class="font-italic mb-1">Having to get a visa to India takes all the fun out of traveling.
                             We are here to get it back. Just apply online below and let us do the rest</p>
-
+                        {{--                        {{ dd($countryPair->Visa) }}--}}
                     </header>
 
 
                     <div class="row">
                         <div class="col-md-3">
                             <!-- Tabs nav -->
-                            <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                               @foreach(\App\Models\VisaCategories::all() as $category)
-                                <a class="nav-link mb-3 p-3 shadow @if($category->categoryName == 'Tourist Visa')  active @endif" id="v-pills-{{ str_replace(' ','',$category->categoryName) }}-tab" data-toggle="pill" href="#v-pills-{{ str_replace(' ','',$category->categoryName) }}" role="tab" aria-controls="v-pills-{{ str_replace(' ','',$category->categoryName) }}" aria-selected="true">
-                                    <i class="fa fa-user-circle-o mr-2"></i>
-                                    <span class="font-weight-bold small text-uppercase">{{ $category->categoryName }}</span></a>
+                            <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist"
+                                 aria-orientation="vertical">
+                                @foreach($countryPair->Visa as $visa)
+                                    <a class="nav-link mb-3 p-3 shadow @if($visa->Category->categoryName == 'Tourist Visa')  active @endif"
+                                       id="v-pills-{{ str_replace(' ','',$visa->Category->categoryName) }}-tab"
+                                       data-toggle="pill"
+                                       href="#v-pills-{{ str_replace(' ','',$visa->Category->categoryName) }}"
+                                       role="tab"
+                                       aria-controls="v-pills-{{ str_replace(' ','',$visa->Category->categoryName) }}"
+                                       aria-selected="true">
+                                        <i class="fa fa-user-circle-o mr-2"></i>
+                                        <span
+                                            class="font-weight-bold small text-uppercase">{{ $visa->Category->categoryName }}</span></a>
                                 @endforeach
                             </div>
                         </div>
@@ -32,14 +40,62 @@
                         <div class="col-md-9">
                             <!-- Tabs content -->
                             <div class="tab-content" id="v-pills-tabContent">
-                                @foreach(\App\Models\VisaCategories::all() as $category)
-                                <div class="tab-pane fade shadow rounded bg-white show p-5 @if($category->categoryName == 'Tourist Visa')  active @endif" id="v-pills-{{ str_replace(' ','',$category->categoryName) }}" role="tabpanel" aria-labelledby="v-pills-{{ str_replace(' ','',$category->categoryName) }}-tab">
-                                    <h4 class="font-italic mb-4">{{ $category->categoryName }}</h4>
-                                    <p class="font-italic text-muted mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </div>
+                                @foreach($countryPair->Visa as $visa)
+
+                                    <div
+                                        class="tab-pane fade shadow rounded bg-white show p-5 @if($visa->Category->categoryName == 'Tourist Visa')  active @endif"
+                                        id="v-pills-{{ str_replace(' ','',$visa->Category->categoryName) }}" role="tabpanel"
+                                        aria-labelledby="v-pills-{{ str_replace(' ','',$visa->Category->categoryName) }}-tab">
+                                        <h4 class="font-italic mb-4">{{ $visa->Category->categoryName }}</h4>
+                                        <p class="font-italic text-muted mb-2">{!! $visa->visaDetails !!}</p>
+                                        <hr>
+                                        <p>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th>Type Of Visa</th>
+                                                    <th>Validity</th>
+                                                    <th>Processing</th>
+                                                    <th>Embassy Fee</th>
+                                                    <th>Service Fee</th>
+                                                    <th>VAT</th>
+                                                    <th>Total Cost</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @if($visa->singleEntry == 1)
+                                                    <tr>
+                                                        <td>{{ $visa->Category->categoryName}}</td>
+                                                        <td>{{ $visa->singleEntryValidity }}</td>
+                                                        <td>{{ $visa->singleEntryProcessing }}</td>
+                                                        <td>{{ $visa->singleEntryEmbassyFee }}</td>
+                                                        <td>{{ $visa->singleEntryServiceFee }}</td>
+                                                        <td>{{ $visa->singleEntryVat }}</td>
+                                                        <td>{{ $visa->singleEntryVat + $visa->singleEntryServiceFee + $visa->singleEntryEmbassyFee }}</td>
+                                                    </tr>
+                                                @endif
+                                                @if($visa->multipleEntry == 1)
+                                                    <tr>
+                                                        <td>{{ $visa->Category->categoryName}}</td>
+                                                        <td>{{ $visa->multipleEntryValidity }}</td>
+                                                        <td>{{ $visa->multipleEntryProcessing }}</td>
+                                                        <td>{{ $visa->multipleEntryEmbassyFee }}</td>
+                                                        <td>{{ $visa->multipleEntryServiceFee }}</td>
+                                                        <td>{{ $visa->multipleEntryVat }}</td>
+                                                        <td>{{ $visa->multipleEntryVat + $visa->multipleEntryServiceFee + $visa->multipleEntryEmbassyFee }}</td>
+                                                    </tr>
+                                                @endif
+                                                </tbody>
+                                            </table>
+                                        </p>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-primary">Get Started</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endforeach
-
-
                             </div>
                         </div>
                     </div>
