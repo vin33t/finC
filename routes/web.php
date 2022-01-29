@@ -113,4 +113,6 @@ Route::get('/sendmail',[App\Http\Controllers\hotel\TestController::class,'Send']
 
 Route::prefix('visa')->group(function() {
     Route::post('details',[App\Http\Controllers\visa\VisaController::class,'details'])->name('visa.details');
+    Route::get('apply/{id}/{type}',[App\Http\Controllers\visa\VisaController::class,'apply'])->name('visa.apply');
+    Route::post('apply/{id}',[App\Http\Controllers\visa\VisaController::class,'applyNow'])->name('visa.apply.now');
 });

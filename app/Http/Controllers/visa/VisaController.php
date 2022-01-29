@@ -4,6 +4,7 @@ namespace App\Http\Controllers\visa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Visa\CountryPair;
+use App\Models\Visa\CountryPairVisa;
 use App\Models\Visa\VisaCountries;
 use Illuminate\Http\Request;
 
@@ -24,5 +25,11 @@ class VisaController extends Controller
             'visaTo' => $visaTo,
             'countryPair'=> $countryPair
         ]);
+    }
+
+    public function apply($id, $type){
+        $visa = CountryPairVisa::find($id);
+        return view('visa.apply')->with('visa',$visa)->with('type',$type);
+
     }
 }

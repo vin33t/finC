@@ -13,4 +13,8 @@ class CountryPairVisa extends Model
     public function Category(){
         return $this->belongsTo('App\Models\Visa\VisaCategories','visaCategoryId');
     }
+    public function Pair(){
+        return $this->belongsTo('App\Models\Visa\CountryPair','visaCountryPairId');
+    }
+
 }

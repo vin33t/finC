@@ -11,8 +11,11 @@ class CountryPair extends Model
     protected $guarded = ['id'];
 
 
-    public function VisaToCountry(){
-        return $this->hasMany('App\Models\Visa\CountryPair','');
+    public function VisaTo(){
+        return $this->belongsTo('App\Models\Visa\VisaCountries','visaCountryChildId');
+    }
+    public function VisaFrom(){
+        return $this->belongsTo('App\Models\Visa\VisaCountries','visaCountryParentId');
     }
 
     public function Visa(){
