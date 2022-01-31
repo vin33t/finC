@@ -109,16 +109,6 @@
             </section>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 @endsection
 @section('script')
 

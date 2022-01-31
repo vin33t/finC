@@ -52,7 +52,7 @@
                         @endif
                     </div>
                     <div class="share mt-2">
-                        share:  
+                        share:
                         <ul>
                             <li><a href="https://www.facebook.com/" target="_blank"><img src="{{ asset('public/images/facebook.jpg')}}" alt="facebook"/></a></li>
                             <li><a href="https://twitter.com/" target="_blank"><img src="{{ asset('public/images/twitter.jpg')}}" alt="facebook"/></a></li>
@@ -94,11 +94,11 @@
             <div class="col-md-4">
                 <div class="card">
                     <!-- <del class="text-muted"><i class="las la-pound-sign"></i>34.50/-</del> -->
-                    
+
                     <h4 class="mb-0 h3 font-weight-600">
                         <span class="text-danger">
                             <!-- <i class="las la-pound-sign"></i> -->
-                            <?php 
+                            <?php
                                 echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                 echo " ";
                             ?>
@@ -106,16 +106,16 @@
                         </span>
                     </h4>
                     <!-- <small>Per Room / Per Night</small> -->
-                    <h5 class="mb-0"><small class="text-muted"><i class="las la-bed"></i> 
-                    <?php 
+                    <h5 class="mb-0"><small class="text-muted"><i class="las la-bed"></i>
+                    <?php
                         if(isset($options[0]['Rooms']['Room']['RoomName'])){
-                          echo $options[0]['Rooms']['Room']['RoomName'];  
+                          echo $options[0]['Rooms']['Room']['RoomName'];
                         }else if(isset($options['Rooms']['Room']['RoomName'])){
                             echo $options['Rooms']['Room']['RoomName'];
                         }else if(isset($options[0]['Rooms']['Room'][0]['RoomName'])){
-                           echo $options[0]['Rooms']['Room'][0]['RoomName']; 
+                           echo $options[0]['Rooms']['Room'][0]['RoomName'];
                         }else{
-                            echo $options['Rooms']['Room'][0]['RoomName']; 
+                            echo $options['Rooms']['Room'][0]['RoomName'];
                         }
                     ?>
                     </small></h5>
@@ -126,8 +126,8 @@
                         <div class="col-6"><p class="m-0 text-dark">Check Out <br><span class="font-weight-600">{{ Carbon\Carbon::parse($searched->check_out)->format('d/m/Y')}}</span></p></div>
                     </div><hr>
 
-                    <p class="text-dark">{{($searched->room1_hotel_adults+$searched->room2_hotel_adults+$searched->room3_hotel_adults+$searched->room4_hotel_adults)}} Adults 
-                        <?php 
+                    <p class="text-dark">{{($searched->room1_hotel_adults+$searched->room2_hotel_adults+$searched->room3_hotel_adults+$searched->room4_hotel_adults)}} Adults
+                        <?php
                             $child=0;
                             if($searched->room1_hotel_child>0){
                                 $child+=1;
@@ -158,11 +158,11 @@
                             }
                         ?>
                     </p>
-                    
+
                       <!-- {{ \Carbon\Carbon::parse($searched->check_in)->diff(\Carbon\Carbon::parse($searched->check_out))->format('%d') }} -->
                     <p class="text-dark">{{$searched->hotel_room}} Room x {{ \Carbon\Carbon::parse($searched->check_in)->diff(\Carbon\Carbon::parse($searched->check_out))->format('%d') }} Nights <span class="float-right font-weight-600">
                         <!-- <i class="las la-pound-sign"></i> -->
-                        <?php 
+                        <?php
                                 echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                 echo " ";
                             ?>
@@ -170,7 +170,7 @@
                     <h4 class="mb-3 font-weight-600">Total
                     <span class="text-danger float-right">
                         <!-- <i class="las la-pound-sign"></i> -->
-                        <?php 
+                        <?php
                                 echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                 echo " ";
                             ?>
@@ -204,7 +204,7 @@
                         <input type="text" name="room4_hotel_adults" value="{{$searched->room4_hotel_adults}}" hidden>
                         <input type="text" name="room4_hotel_child" value="{{$searched->room4_hotel_child}}" hidden>
                         <input type="text" name="room4_hotel_infant" value="{{$searched->room4_hotel_infant}}" hidden>
-                                     
+
                         <button type="submit" class="btn btn-primary w-100" onclick="showLoder();">Book Now</button>
                     </form>
                 </div>
@@ -308,11 +308,11 @@
                             <div class="col-md-8">
                                 <h4>{{$options['Rooms']['Room']['RoomName']}}</h4>
                                 <span class="badge badge-warning">Partially Cancellable</span>
-                                
+
                                 <ul class="amenities-ul">
                                     <li>{{isset($options['BoardType'])? $options['BoardType']:'' }}</li>
                                     <li>After {{date('d-m-Y')}} 23:59, Cancellation charge of GBP {{$options['TotalPrice']}} will be applied.</li>
-                                    
+
                                     <!-- <li>After 03/09/2021 17:59, Cancellation charge of GBP 40.14 will be applied.</li> -->
                                     <!-- <li>Unlimited usage of internet <a href="#">+ 7 More</a></li> -->
                                 </ul>
@@ -325,7 +325,7 @@
                                 <!-- <del class="text-muted"><i class="las la-pound-sign"></i>30.00/night</del><br> -->
                                 <h4 class="mb-0 h3 font-weight-600"><span class="text-danger">
                                     <!-- <i class="las la-pound-sign"></i> -->
-                                    <?php 
+                                    <?php
                                         echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                         echo " ";
                                     ?>
@@ -359,7 +359,7 @@
                                     <input type="text" name="room4_hotel_adults" value="{{$searched->room4_hotel_adults}}" hidden>
                                     <input type="text" name="room4_hotel_child" value="{{$searched->room4_hotel_child}}" hidden>
                                     <input type="text" name="room4_hotel_infant" value="{{$searched->room4_hotel_infant}}" hidden>
-                                        
+
                                     <button type="submit" class="btn btn-primary mt-2" onclick="showLoder();">Book Now</button>
                                 </form>
                             </div>
@@ -373,11 +373,11 @@
                             <div class="col-md-8">
                                 <h4>{{$options['Rooms']['Room'][0]['RoomName']}}</h4>
                                 <span class="badge badge-warning">Partially Cancellable</span>
-                                
+
                                 <ul class="amenities-ul">
                                     <li>{{isset($options['BoardType'])? $options['BoardType']:'' }}</li>
                                     <li>After {{date('d-m-Y')}} 23:59, Cancellation charge of GBP {{$options['TotalPrice']}} will be applied.</li>
-                                    
+
                                     <!-- <li>After 03/09/2021 17:59, Cancellation charge of GBP 40.14 will be applied.</li> -->
                                     <!-- <li>Unlimited usage of internet <a href="#">+ 7 More</a></li> -->
                                 </ul>
@@ -390,7 +390,7 @@
                                 <!-- <del class="text-muted"><i class="las la-pound-sign"></i>30.00/night</del><br> -->
                                 <h4 class="mb-0 h3 font-weight-600"><span class="text-danger">
                                     <!-- <i class="las la-pound-sign"></i> -->
-                                    <?php 
+                                    <?php
                                         echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                         echo " ";
                                     ?>
@@ -423,7 +423,7 @@
                                     <input type="text" name="room4_hotel_adults" value="{{$searched->room4_hotel_adults}}" hidden>
                                     <input type="text" name="room4_hotel_child" value="{{$searched->room4_hotel_child}}" hidden>
                                     <input type="text" name="room4_hotel_infant" value="{{$searched->room4_hotel_infant}}" hidden>
-                                        
+
                                     <button type="submit" class="btn btn-primary mt-2" onclick="showLoder();">Book Now</button>
                                 </form>
                             </div>
@@ -438,7 +438,7 @@
                             <div class="col-md-8">
                                 <h4>{{isset($option['Rooms']['Room']['RoomName'])? $option['Rooms']['Room']['RoomName']: $option['Rooms']['Room'][0]['RoomName']}}</h4>
                                 <span class="badge badge-warning">Partially Cancellable</span>
-                                
+
                                 <ul class="amenities-ul">
                                     <li>{{isset($option['BoardType'])? $option['BoardType']:'' }}</li>
                                     <li>After {{date('d-m-Y')}} 23:59, Cancellation charge of GBP {{$option['TotalPrice']}} will be applied.</li>
@@ -453,7 +453,7 @@
                                 <!-- <del class="text-muted"><i class="las la-pound-sign"></i>30.00/night</del><br> -->
                                 <h4 class="mb-0 h3 font-weight-600"><span class="text-danger">
                                     <!-- <i class="las la-pound-sign"></i> -->
-                                    <?php 
+                                    <?php
                                         echo $val=DB::table('hotel_currency')->where('currency',$searched->currency)->value('icon');
                                         echo " ";
                                     ?>
@@ -487,7 +487,7 @@
                                     <input type="text" name="room4_hotel_adults" value="{{$searched->room4_hotel_adults}}" hidden>
                                     <input type="text" name="room4_hotel_child" value="{{$searched->room4_hotel_child}}" hidden>
                                     <input type="text" name="room4_hotel_infant" value="{{$searched->room4_hotel_infant}}" hidden>
-                                        
+
                                     <button type="submit" class="btn btn-primary mt-2" onclick="showLoder();">Book Now</button>
                                 </form>
                             </div>
@@ -557,12 +557,12 @@
                         @else
                         <li>{{$policies['Alerts']['Alert']}}</li>
                         @endif
-                       
+
                     </ul>
                     @else
                     <ul>
                         <li></li>
-                        
+
                     </ul>
                     @endif
                 </div>

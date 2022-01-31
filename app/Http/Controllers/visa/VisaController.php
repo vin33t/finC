@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Visa\CountryPair;
 use App\Models\Visa\CountryPairVisa;
 use App\Models\Visa\VisaCountries;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class VisaController extends Controller
@@ -28,8 +29,12 @@ class VisaController extends Controller
     }
 
     public function apply($id, $type){
+        $dt = Carbon::now();
+        $dt->timezone('Asia/Kolkata');
+        $date_today = $dt->timezone('Europe/London');
+        $date = $date_today->toDateString();
         $visa = CountryPairVisa::find($id);
-        return view('visa.apply')->with('visa',$visa)->with('type',$type);
+        return view('visa.apply')->with('visa',$visa)->with('type',$type)->with('date',$date);
 
     }
 }

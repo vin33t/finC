@@ -279,7 +279,9 @@ class HotelController extends Controller
             'searched'=>$request,
             'allfacilities'=>array_slice($allfacilities,0,8),
             'pricearr'=>$pricearr,
-            'hotel_currency'=>$hotel_currency
+            'hotel_currency'=>$hotel_currency,
+            'checkInDate'=>$checkinDate,
+            'checkOutDate'=>$checkoutDate,
         ]);
     }
     function paginate($items, $perPage = 5, $page = null, $options = [])

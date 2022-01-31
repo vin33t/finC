@@ -19,11 +19,18 @@
                 </div>
                 <div class="col-md col-6 my-2 my-md-0">
                     <small class="text-muted d-block mb-1">Check In</small>
-                    <h6 class="font-weight-600 mb-0">{{ date("d/m/Y", strtotime($searched->check_in))}}</h6>
+                    <h6 class="font-weight-600 mb-0">
+                        {{  \Carbon\Carbon::parse($checkInDate)->format('d-M-Y') }}
+{{--                        {{ date("d/m/Y", strtotime($searched->check_in))}}--}}
+                    </h6>
                 </div>
                 <div class="col-md col-6 my-2 my-md-0">
                     <small class="text-muted d-block mb-1">Check Out</small>
-                    <h6 class="font-weight-600 mb-0">{{ date("d/m/Y", strtotime($searched->check_out))}}</h6>
+                    <h6 class="font-weight-600 mb-0">
+                        {{  \Carbon\Carbon::parse($checkOutDate)->format('d-M-Y') }}
+
+{{--                        {{ date("d/m/Y", strtotime($searched->check_out))}}--}}
+                    </h6>
                 </div>
                 <div class="col-md col-6">
                     <small class="text-muted d-block mb-1">Room and Guests</small>
@@ -697,8 +704,8 @@
                                                     @csrf
                                                     <input type="text" name="hotel_id" value="{{$hotel[$i]['HotelId']}}" hidden>
                                                     <input type="text" name="Options" value="{{json_encode($hotel[$i]['Options']['Option'])}}" hidden>
-                                                    <input type="text" name="check_in" value="{{$searched->check_in}}" hidden>
-                                                    <input type="text" name="check_out" value="{{$searched->check_out}}" hidden>
+                                                    <input type="text" name="check_in" value="{{$checkInDate}}" hidden>
+                                                    <input type="text" name="check_out" value="{{$checkOutDate}}" hidden>
                                                     <input type="text" name="city_name" value="{{$searched->city_name}}" hidden>
                                                     <input type="text" name="hotel_room" value="{{$searched->hotel_room}}" hidden>
                                                     <input type="text" name="currency" value="{{$searched->currency}}" hidden>
@@ -748,8 +755,8 @@
                                         @csrf
                                         <input type="text" name="hotel_id" value="{{$hotel[$i]['HotelId']}}" hidden>
                                         <input type="text" name="Options" value="{{json_encode($hotel[$i]['Options']['Option'])}}" hidden>
-                                        <input type="text" name="check_in" value="{{$searched->check_in}}" hidden>
-                                        <input type="text" name="check_out" value="{{$searched->check_out}}" hidden>
+                                        <input type="text" name="check_in" value="{{$checkInDate}}" hidden>
+                                        <input type="text" name="check_out" value="{{$checkOutDate}}" hidden>
                                         <input type="text" name="city_name" value="{{$searched->city_name}}" hidden>
                                         <input type="text" name="hotel_room" value="{{$searched->hotel_room}}" hidden>
                                         <input type="text" name="currency" value="{{$searched->currency}}" hidden>

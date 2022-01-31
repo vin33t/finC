@@ -116,3 +116,5 @@ Route::prefix('visa')->group(function() {
     Route::get('apply/{id}/{type}',[App\Http\Controllers\visa\VisaController::class,'apply'])->name('visa.apply');
     Route::post('apply/{id}',[App\Http\Controllers\visa\VisaController::class,'applyNow'])->name('visa.apply.now');
 });
+
+Route::post('store/client',[\App\Http\Controllers\ClientController::class,'store'])->name('store.client');

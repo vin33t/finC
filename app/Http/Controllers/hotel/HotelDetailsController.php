@@ -58,7 +58,7 @@ class HotelDetailsController extends Controller
                     $hotelDetails= $json['Body']['Hotels']['Hotel'];
                     // array_push($hotelDetails,$hotels);
                 }
-                
+
             }
         }
         // return $hotelDetails;
@@ -77,14 +77,14 @@ class HotelDetailsController extends Controller
         //     // echo "<br/>";
         // }
         // return $xmloptions;
-        
+
         $xml1 = '<?xml version="1.0" encoding="UTF-8"?>
                 <Request>
                     <Head>
                         <Username>'.$Username.'</Username>
                         <Password>'.$Password.'</Password>
                         <RequestType>HotelPolicies</RequestType>
-                        
+
                     </Head>
                     <Body>
                         <OptionId>'.$Optionsss.'</OptionId>
@@ -117,7 +117,7 @@ class HotelDetailsController extends Controller
                 //     $hotelDetails= $json['Body']['Hotels']['Hotel'];
                 //     // array_push($hotelDetails,$hotels);
                 // }
-                
+
             }
         }
 
@@ -127,13 +127,14 @@ class HotelDetailsController extends Controller
         // return $Options;
         // return $request;
         $hotel_currency=HotelCurrency::get();
+//        dd($request);
         return view('hotel.hotel-details',[
             'hotelDetails'=>$hotelDetails,
             'options'=>$Options,
             'policies'=>$Policies,
             'hotel_currency'=>$hotel_currency,
-            'searched'=>$request
+            'searched'=>$request,
         ]);
-        
+
     }
 }

@@ -24,13 +24,13 @@ class FlightDetailsController extends Controller
         //         $arrNewResult['key']=$journeys[$i]['Key'];
         //     }
         // }
-       
+
         // // $arrNewResult = array();
         // // $arrNewResult['changepenalty'] = "gii";
         // // $arrNewResult['count'] = count($flights[0]);
         // $status_json = json_encode($arrNewResult);
         // echo $status_json;
-       
+
         // return  $flightss;
         // echo count($flights[0]);
         $datasegment='';
@@ -47,7 +47,7 @@ class FlightDetailsController extends Controller
         // echo $status_json;
         // $datasegment.= '<air:AirSegment Key="'.get_object_vars($journeys[$i]->Key)[0].'" Group="'.get_object_vars($journeys[$i]->Group)[0].'" Carrier="'.get_object_vars($journeys[$i]->Airline)[0].'" FlightNumber="'.get_object_vars($journeys[$i]->Flight)[0].'" Origin="'.get_object_vars($journeys[$i]->From)[0].'" Destination="'.get_object_vars($journeys[$i]->To)[0].'" DepartureTime="'.get_object_vars($journeys[$i]->Depart)[0].'" ArrivalTime="'.get_object_vars($journeys[$i]->Arrive)[0].'" FlightTime="'.get_object_vars($journeys[$i]->FlightTime)[0].'" Distance="'.get_object_vars($journeys[$i]->Distance)[0].'" ETicketability="Yes" Equipment="E90" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop" ProviderCode="1G" ClassOfService="W"></air:AirSegment>';
         // echo  get_object_vars($journeys[$i]->Key)[0]; echo "<br/>";
-        
+
         // return $datasegment;
         // foreach($flights[1] as $prices){
         // }
@@ -92,12 +92,12 @@ EOM;
         curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($soap_do);
         curl_close($soap_do);
-       
+
         $dom = new \DOMDocument();
         $dom->loadXML($return);
         $json = new \FluentDOM\Serializer\Json\RabbitFish($dom);
         $object = json_decode($json,true);
-       
+
         $data=collect();
         $journey=collect();
         $count=1;
@@ -110,19 +110,19 @@ EOM;
                             foreach($jsons2 as $jsons3){
                                 if(is_array($jsons3)){
                                     // echo $count." count";
-                                        // echo "<br/>"; 
+                                        // echo "<br/>";
                                     if($count==3){
                                         // print_r($jsons3);
-                                        // echo "<br/><br/>"; 
+                                        // echo "<br/><br/>";
                                         $count2=1;
                                         foreach($jsons3 as $jsons4){
                                             // echo "count";
                                             // print_r($jsons4);
-                                            // echo "<br/><br/>"; 
-                                            $journey=collect();     
+                                            // echo "<br/><br/>";
+                                            $journey=collect();
                                             if($count2==2){
                                                 // print_r($jsons4);
-                                                // echo "<br/><br/>"; 
+                                                // echo "<br/><br/>";
                                                 $details1=[];
                                                 // please check this position
                                                 if(is_array($jsons4)){
@@ -208,21 +208,19 @@ EOM;
                                                                     if(strcmp($k, "@ClassOfService") == 0){
                                                                         $details["ClassOfService"]=$jsons6;
                                                                     }
-                                                                
-
                                                                 }
                                                             }
                                                             if(empty($details1) && !empty($details)){
-                                                                $journey->push($details); 
-                                                            }    
+                                                                $journey->push($details);
+                                                            }
                                                         }
                                                     }
                                                 }
                                                 if(!empty($details1)){
-                                                    $journey->push($details1);     
+                                                    $journey->push($details1);
                                                 }
                                                 // return $journey;
-                                                $data->push(["journey"=>collect($journey)]);     
+                                                $data->push(["journey"=>collect($journey)]);
                                             }
                                             $count2++;
                                         }
@@ -301,7 +299,7 @@ EOM;
                                                                     foreach($jsons15 as $jsons16){
                                                                         // echo $count16;
                                                                         // print_r($jsons16);
-                                                                        // echo "<br/><br/><br/>"; 
+                                                                        // echo "<br/><br/><br/>";
                                                                         // if($count16==21){
                                                                         //     echo $count16;
                                                                         //     print_r($jsons16);
@@ -321,9 +319,9 @@ EOM;
                                                                                                 $details4["changepenalty"]=$jsons18;
                                                                                             }
                                                                                             // print_r($c."- " .$jsons18);
-                                                                                            // echo "<br/><br/><br/>"; 
+                                                                                            // echo "<br/><br/><br/>";
                                                                                         }
-                                                                                        
+
                                                                                     }
                                                                                 }
                                                                             }
@@ -341,9 +339,9 @@ EOM;
                                                                                             $details4["cancelpenalty"]=$jsons20;
                                                                                         }
                                                                                         // print_r($c."- " .$jsons20);
-                                                                                        // echo "<br/><br/><br/>"; 
+                                                                                        // echo "<br/><br/><br/>";
                                                                                     }
-                                                                                    
+
                                                                                 }
                                                                             }
                                                                         }
@@ -351,11 +349,11 @@ EOM;
                                                                             // echo $count16;
                                                                             // print_r($jsons16);
                                                                             // echo "<br/><br/><br/>";
-                                                                            $count17=1;   
+                                                                            $count17=1;
                                                                             foreach($jsons16 as $jsons17){
                                                                                 // echo $count17;
                                                                                 // print_r($jsons17);
-                                                                                // echo "<br/><br/><br/>"; 
+                                                                                // echo "<br/><br/><br/>";
                                                                                 if($count17==2){
                                                                                     // print_r($jsons17);
                                                                                     // echo "<br/><br/><br/>";
@@ -385,9 +383,9 @@ EOM;
                                                                                                             foreach($jsons20 as $bg=>$jsons21){
                                                                                                                 // print_r($jsons21);
                                                                                                                 // echo "<br/><br/><br/>";
-                                                                                                                if(strcmp($bg, "$") == 0){	
+                                                                                                                if(strcmp($bg, "$") == 0){
                                                                                                                     $details4["baggageallowanceinfo"]=$jsons21;
-                                                                                                                }	
+                                                                                                                }
                                                                                                             }
                                                                                                         }
                                                                                                         $count20++;
@@ -406,7 +404,7 @@ EOM;
                                                                                     foreach($jsons17 as $jsons18){
                                                                                         // print_r($jsons18);
                                                                                         // echo "<br/><br/><br/>";
-                                                                                        // if($count21==5){  //non stop flight  
+                                                                                        // if($count21==5){  //non stop flight
                                                                                         if($count21==2 && is_array($jsons18)){
                                                                                             // print_r($jsons18);
                                                                                             // echo "<br/><br/><br/>";
@@ -414,7 +412,7 @@ EOM;
                                                                                             foreach($jsons18 as $jsons19){
                                                                                                 // echo $count22;
                                                                                                 // print_r($jsons19);
-                                                                                                // echo "<br/><br/><br/>"; 
+                                                                                                // echo "<br/><br/><br/>";
                                                                                                 if($count22==5){
                                                                                                     // print_r($jsons19);
                                                                                                     // echo "<br/><br/><br/>";
@@ -424,16 +422,16 @@ EOM;
                                                                                                         // echo "<br/><br/><br/>";
                                                                                                         if($count23==2){
                                                                                                             // print_r($jsons20);
-                                                                                                            // echo "<br/><br/><br/>"; 
+                                                                                                            // echo "<br/><br/><br/>";
                                                                                                             foreach($jsons20 as $cbb=>$jsons21){
                                                                                                                 if(is_string($jsons21)){
                                                                                                                     // print_r($cbb."-".$jsons21);
                                                                                                                     // echo "<br/><br/><br/>";
-                                                                                                                    if(strcmp($cbb, "$") == 0){	
+                                                                                                                    if(strcmp($cbb, "$") == 0){
                                                                                                                         $details4["carryonallowanceinfo"]=$jsons21;
-                                                                                                                    }	
+                                                                                                                    }
                                                                                                                 }
-                                                                                                                
+
                                                                                                             }
                                                                                                         }
                                                                                                         $count23++;
@@ -456,9 +454,9 @@ EOM;
                                                                                                             if(is_string($jsons20)){
                                                                                                                 // print_r($cbb."-".$jsons21);
                                                                                                                 // echo "<br/><br/><br/>";
-                                                                                                                if(strcmp($cbb, "$") == 0){	
+                                                                                                                if(strcmp($cbb, "$") == 0){
                                                                                                                     $details4["carryonallowanceinfo"]=$jsons20;
-                                                                                                                }	
+                                                                                                                }
                                                                                                             }
                                                                                                         }
                                                                                                     }
@@ -469,7 +467,7 @@ EOM;
                                                                                         $count21++;
                                                                                     }
                                                                                 }
-                                                                                
+
                                                                                 $count17++;
                                                                             }
                                                                         }
@@ -489,21 +487,21 @@ EOM;
                                             }
                                         }
                                         // print_r($jsons3);
-                                        // echo "<br/>"; 
+                                        // echo "<br/>";
                                     }
                                     $count++;
                                 }
-                               
+
                             }
                             // print_r($jsons2);
-                            // echo "<br/><br/><br/><br/><br/>"; 
+                            // echo "<br/><br/><br/><br/><br/>";
                         }
-                    } 
+                    }
                 }
             }
         }
         // return $data;
-       
+
         $arrNewResult = array();
         // $arrNewResult['changepenalty'] = $data[1]['details']['changepenalty'];
         $arrNewResult['changepenalty'] = isset($data[1]['details']['changepenalty'])?$data[1]['details']['changepenalty']:'';
@@ -528,7 +526,7 @@ EOM;
     public function FlightDetails(Request $request){
         $count=$request->count;
         $currency_code=$request->currency_code;
-        
+
         // $flights=$request->flights;
          // $flights=json_decode($request->flights);
         // $flights=json_decode($request->input('flights'));
@@ -541,13 +539,13 @@ EOM;
         //         $arrNewResult['key']=$journeys[$i]['Key'];
         //     }
         // }
-       
+
         // // $arrNewResult = array();
         // // $arrNewResult['changepenalty'] = "gii";
         // // $arrNewResult['count'] = count($flights[0]);
         // $status_json = json_encode($arrNewResult);
         // echo $status_json;
-       
+
         // return  $flightss;
         // echo count($flights[0]);
         $currency_xml='';
@@ -556,7 +554,7 @@ EOM;
             <air:BrandModifiers ModifierType="FareFamilyDisplay" />
             </air:AirPricingModifiers>';
         }else{
-            $currency_xml='<air:AirPricingModifiers/>'; 
+            $currency_xml='<air:AirPricingModifiers/>';
         }
 
 
@@ -574,14 +572,14 @@ EOM;
         // echo $status_json;
         // $datasegment.= '<air:AirSegment Key="'.get_object_vars($journeys[$i]->Key)[0].'" Group="'.get_object_vars($journeys[$i]->Group)[0].'" Carrier="'.get_object_vars($journeys[$i]->Airline)[0].'" FlightNumber="'.get_object_vars($journeys[$i]->Flight)[0].'" Origin="'.get_object_vars($journeys[$i]->From)[0].'" Destination="'.get_object_vars($journeys[$i]->To)[0].'" DepartureTime="'.get_object_vars($journeys[$i]->Depart)[0].'" ArrivalTime="'.get_object_vars($journeys[$i]->Arrive)[0].'" FlightTime="'.get_object_vars($journeys[$i]->FlightTime)[0].'" Distance="'.get_object_vars($journeys[$i]->Distance)[0].'" ETicketability="Yes" Equipment="E90" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop" ProviderCode="1G" ClassOfService="W"></air:AirSegment>';
         // echo  get_object_vars($journeys[$i]->Key)[0]; echo "<br/>";
-        
+
         // return $datasegment;
         // foreach($flights[1] as $prices){
         // }
         $CREDENTIALS = app('App\Http\Controllers\UniversalConfigAPIController')->CREDENTIALS();
         $Provider =app('App\Http\Controllers\UniversalConfigAPIController')->Provider();
         $TARGETBRANCH =app('App\Http\Controllers\UniversalConfigAPIController')->TARGETBRANCH();
-        
+
         // $TARGETBRANCH = 'P7141733';
         // $CREDENTIALS = 'Universal API/uAPI4648209292-e1e4ba84:9Jw*C+4c/5';
         // $Provider = '1G'; // Any provider you want to use like 1G/1P/1V/ACH
@@ -623,12 +621,12 @@ EOM;
         curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($soap_do);
         curl_close($soap_do);
-       
+
         $dom = new \DOMDocument();
         $dom->loadXML($return);
         $json = new \FluentDOM\Serializer\Json\RabbitFish($dom);
         $object = json_decode($json,true);
-       
+
         $data=collect();
         $journey=collect();
         $count=1;
@@ -732,26 +730,26 @@ EOM;
                                                     $details["ClassOfService"]=$jsons6;
                                                 }
                                                 // $details["changeofplane"] =$jsons6;
-                                                // $details["optionalservicesindicator"]=$jsons6; 
+                                                // $details["optionalservicesindicator"]=$jsons6;
                                                 // $details["availabilitysource"] =$jsons6;
                                                 // $details["polledavailabilityoption"] =$jsons6;
                                                 // print_r($jsons6);
                                                 // echo "<br/>";
-                                                // $journey->push($details);   
+                                                // $journey->push($details);
                                                 // print_r($k." - ".$jsons6);
-                                            
+
                                             }
                                         }
                                         if(empty($details1) && !empty($details)){
-                                            $journey->push($details); 
-                                        }    
+                                            $journey->push($details);
+                                        }
                                     }
                                 }
                                 if(!empty($details1)){
-                                    $journey->push($details1);     
+                                    $journey->push($details1);
                                 }
                                 // return $journey;
-                                $data->push(["journey"=>collect($journey)]);      
+                                $data->push(["journey"=>collect($journey)]);
 
                             }
                             if(array_key_exists('air:AirPriceResult',$jsons2)){
@@ -810,9 +808,9 @@ EOM;
                                             $price["TariffNumber"] =$jsons15;
                                         }
                                     }
-                                
+
                                 }
-                                // $data->push(["price"=>collect($price)]);     
+                                // $data->push(["price"=>collect($price)]);
                                 $AirPricingInfo=collect();
                                 $FareInfo1=collect();
                                 $FareRuleKey1=collect();
@@ -923,7 +921,7 @@ EOM;
                                             }
 
                                             // start multiple travel add adult and child
-                                            
+
                                             // return $value;
                                             // print_r($value);
                                             // print_r($value['air:FareInfo']);
@@ -949,31 +947,31 @@ EOM;
                                                         }
                                                         if(strcmp($fI, "@PassengerTypeCode") == 0){
                                                             $FareInfo["PassengerTypeCode"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Origin") == 0){
                                                             $FareInfo["Origin"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Destination") == 0){
                                                             $FareInfo["Destination"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@EffectiveDate") == 0){
                                                             $FareInfo["EffectiveDate"] =$jsons17;
-                                                        }  
+                                                        }
                                                         if(strcmp($fI, "@DepartureDate") == 0){
                                                             $FareInfo["DepartureDate"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Amount") == 0){
                                                             $FareInfo["Amount"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@NegotiatedFare") == 0){
                                                             $FareInfo["NegotiatedFare"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@NotValidBefore") == 0){
                                                             $FareInfo["NotValidBefore"] =$jsons17;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@TaxAmount") == 0){
                                                             $FareInfo["TaxAmount"] =$jsons17;
-                                                        } 
+                                                        }
                                                     }else{
                                                         foreach($jsons17 as $fI =>$jsons18){
                                                             if(is_string($jsons18)){
@@ -987,31 +985,31 @@ EOM;
                                                                 }
                                                                 if(strcmp($fI, "@PassengerTypeCode") == 0){
                                                                     $FareInfo0["PassengerTypeCode"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@Origin") == 0){
                                                                     $FareInfo0["Origin"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@Destination") == 0){
                                                                     $FareInfo0["Destination"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@EffectiveDate") == 0){
                                                                     $FareInfo0["EffectiveDate"] =$jsons18;
-                                                                }  
+                                                                }
                                                                 if(strcmp($fI, "@DepartureDate") == 0){
                                                                     $FareInfo0["DepartureDate"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@Amount") == 0){
                                                                     $FareInfo0["Amount"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@NegotiatedFare") == 0){
                                                                     $FareInfo0["NegotiatedFare"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@NotValidBefore") == 0){
                                                                     $FareInfo0["NotValidBefore"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($fI, "@TaxAmount") == 0){
                                                                     $FareInfo0["TaxAmount"] =$jsons18;
-                                                                } 
+                                                                }
                                                             }
                                                         }
                                                         // print_r($jsons17['air:FareRuleKey']);
@@ -1022,13 +1020,13 @@ EOM;
                                                                 if(is_string($jsons19)){
                                                                     if(strcmp($frk, "@FareInfoRef") == 0){
                                                                         $FareRuleKey0["FareInfoRef"] =$jsons19;
-                                                                    } 
+                                                                    }
                                                                     if(strcmp($frk, "@ProviderCode") == 0){
                                                                         $FareRuleKey0["ProviderCode"] =$jsons19;
-                                                                    } 
+                                                                    }
                                                                     if(strcmp($frk, "$") == 0){
                                                                         $FareRuleKey0["FareRuleKeyValue"] =$jsons19;
-                                                                    } 
+                                                                    }
                                                                 }
                                                             }
                                                             $FareRuleKey1->push($FareRuleKey0);
@@ -1043,7 +1041,7 @@ EOM;
                                                         // print_r($value['air:FareInfo']['air:FareRuleKey']);
                                                         // echo "<br/><br/>";
                                                         $FareRuleKey=[];
-                                                        
+
                                                         foreach($value['air:FareInfo']['air:FareRuleKey'] as $frk => $jsons18){
                                                             // print_r($jsons18);
                                                             // echo "<br/><br/><br/>";
@@ -1053,13 +1051,13 @@ EOM;
                                                                 // echo "<br/><br/><br/>";
                                                                 if(strcmp($frk, "@FareInfoRef") == 0){
                                                                     $FareRuleKey["FareInfoRef"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($frk, "@ProviderCode") == 0){
                                                                     $FareRuleKey["ProviderCode"] =$jsons18;
-                                                                } 
+                                                                }
                                                                 if(strcmp($frk, "$") == 0){
                                                                     $FareRuleKey["FareRuleKeyValue"] =$jsons18;
-                                                                } 
+                                                                }
                                                             }else{
                                                                 foreach($jsons18 as $frk => $jsons19){
                                                                     if(is_string($jsons19)){
@@ -1067,13 +1065,13 @@ EOM;
                                                                         // echo "<br/><br/><br/>";
                                                                         if(strcmp($frk, "@FareInfoRef") == 0){
                                                                             $FareRuleKey0["FareInfoRef"] =$jsons19;
-                                                                        } 
+                                                                        }
                                                                         if(strcmp($frk, "@ProviderCode") == 0){
                                                                             $FareRuleKey0["ProviderCode"] =$jsons19;
-                                                                        } 
+                                                                        }
                                                                         if(strcmp($frk, "$") == 0){
                                                                             $FareRuleKey0["FareRuleKeyValue"] =$jsons19;
-                                                                        } 
+                                                                        }
                                                                     }
                                                                 }
                                                                 // if(empty($FareRuleKey) && !empty($FareRuleKey0)){
@@ -1139,7 +1137,7 @@ EOM;
                                                                     $BookingInfo0["HostTokenRef"] =$jsons18;
                                                                 }
                                                             }
-                                                        } 
+                                                        }
                                                     }
                                                     if(empty($BookingInfo) && !empty($BookingInfo0)){
                                                         $BookingInfo1->push($BookingInfo0);
@@ -1171,7 +1169,7 @@ EOM;
                                                             if(strcmp($tki, "@Key") == 0){
                                                                 $TaxInfo1["Key"] =$jsons18;
                                                             }
-                                                        
+
                                                         }
                                                     }
                                                     $TaxInfo->push($TaxInfo1);
@@ -1213,14 +1211,14 @@ EOM;
                                                                 $details4["changepenalty"]=$jsons18;
                                                             }
                                                             // print_r($c."- " .$jsons18);
-                                                            // echo "<br/><br/><br/>"; 
+                                                            // echo "<br/><br/><br/>";
                                                         }
-                                                        
+
                                                     }
                                                 }
                                             }
                                             if(array_key_exists('air:CancelPenalty', $value)){
-                                            
+
                                                 foreach($value['air:CancelPenalty'] as $jsons19){
                                                     // print_r($jsons19);
                                                     // echo "<br/><br/><br/>";
@@ -1230,20 +1228,20 @@ EOM;
                                                                 $details4["cancelpenalty"]=$jsons20;
                                                             }
                                                             // print_r($c."- " .$jsons20);
-                                                            // echo "<br/><br/><br/>"; 
+                                                            // echo "<br/><br/><br/>";
                                                         }
-                                                        
+
                                                     }
                                                 }
                                             }
                                             if(array_key_exists('air:BaggageAllowances', $value)){
                                                 // print_r($jsons14['air:BaggageAllowances']);
                                                 // echo "<br/><br/>";
-                                                $count17=1;   
+                                                $count17=1;
                                                 foreach($value['air:BaggageAllowances'] as $jsons17){
                                                     // echo $count17;
                                                     // print_r($jsons17);
-                                                    // echo "<br/><br/><br/>"; 
+                                                    // echo "<br/><br/><br/>";
                                                     if($count17==2){
                                                         // print_r($jsons17);
                                                         // echo "<br/><br/><br/>";
@@ -1273,9 +1271,9 @@ EOM;
                                                                                 foreach($jsons20 as $bg=>$jsons21){
                                                                                     // print_r($jsons21);
                                                                                     // echo "<br/><br/><br/>";
-                                                                                    if(strcmp($bg, "$") == 0){	
+                                                                                    if(strcmp($bg, "$") == 0){
                                                                                         $details4["baggageallowanceinfo"]=$jsons21;
-                                                                                    }	
+                                                                                    }
                                                                                 }
                                                                             }
                                                                             $count20++;
@@ -1294,7 +1292,7 @@ EOM;
                                                         foreach($jsons17 as $jsons18){
                                                             // print_r($jsons18);
                                                             // echo "<br/><br/><br/>";
-                                                            // if($count21==5){  //non stop flight  
+                                                            // if($count21==5){  //non stop flight
                                                             if($count21==2 && is_array($jsons18)){
                                                                 // print_r($jsons18);
                                                                 // echo "<br/><br/><br/>";
@@ -1302,7 +1300,7 @@ EOM;
                                                                 foreach($jsons18 as $jsons19){
                                                                     // echo $count22;
                                                                     // print_r($jsons19);
-                                                                    // echo "<br/><br/><br/>"; 
+                                                                    // echo "<br/><br/><br/>";
                                                                     if($count22==5){
                                                                         // print_r($jsons19);
                                                                         // echo "<br/><br/><br/>";
@@ -1312,16 +1310,16 @@ EOM;
                                                                             // echo "<br/><br/><br/>";
                                                                             if($count23==2){
                                                                                 // print_r($jsons20);
-                                                                                // echo "<br/><br/><br/>"; 
+                                                                                // echo "<br/><br/><br/>";
                                                                                 foreach($jsons20 as $cbb=>$jsons21){
                                                                                     if(is_string($jsons21)){
                                                                                         // print_r($cbb."-".$jsons21);
                                                                                         // echo "<br/><br/><br/>";
-                                                                                        if(strcmp($cbb, "$") == 0){	
+                                                                                        if(strcmp($cbb, "$") == 0){
                                                                                             $details4["carryonallowanceinfo"]=$jsons21;
-                                                                                        }	
+                                                                                        }
                                                                                     }
-                                                                                    
+
                                                                                 }
                                                                             }
                                                                             $count23++;
@@ -1344,9 +1342,9 @@ EOM;
                                                                                 if(is_string($jsons20)){
                                                                                     // print_r($cbb."-".$jsons21);
                                                                                     // echo "<br/><br/><br/>";
-                                                                                    if(strcmp($cbb, "$") == 0){	
+                                                                                    if(strcmp($cbb, "$") == 0){
                                                                                         $details4["carryonallowanceinfo"]=$jsons20;
-                                                                                    }	
+                                                                                    }
                                                                                 }
                                                                             }
                                                                         }
@@ -1357,7 +1355,7 @@ EOM;
                                                             $count21++;
                                                         }
                                                     }
-                                                    
+
                                                     $count17++;
                                                 }
                                             }
@@ -1396,31 +1394,31 @@ EOM;
                                                 }
                                                 if(strcmp($fI, "@PassengerTypeCode") == 0){
                                                     $FareInfo["PassengerTypeCode"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@Origin") == 0){
                                                     $FareInfo["Origin"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@Destination") == 0){
                                                     $FareInfo["Destination"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@EffectiveDate") == 0){
                                                     $FareInfo["EffectiveDate"] =$jsons17;
-                                                }  
+                                                }
                                                 if(strcmp($fI, "@DepartureDate") == 0){
                                                     $FareInfo["DepartureDate"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@Amount") == 0){
                                                     $FareInfo["Amount"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@NegotiatedFare") == 0){
                                                     $FareInfo["NegotiatedFare"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@NotValidBefore") == 0){
                                                     $FareInfo["NotValidBefore"] =$jsons17;
-                                                } 
+                                                }
                                                 if(strcmp($fI, "@TaxAmount") == 0){
                                                     $FareInfo["TaxAmount"] =$jsons17;
-                                                } 
+                                                }
                                             }else{
                                                 foreach($jsons17 as $fI =>$jsons18){
                                                     if(is_string($jsons18)){
@@ -1434,31 +1432,31 @@ EOM;
                                                         }
                                                         if(strcmp($fI, "@PassengerTypeCode") == 0){
                                                             $FareInfo0["PassengerTypeCode"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Origin") == 0){
                                                             $FareInfo0["Origin"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Destination") == 0){
                                                             $FareInfo0["Destination"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@EffectiveDate") == 0){
                                                             $FareInfo0["EffectiveDate"] =$jsons18;
-                                                        }  
+                                                        }
                                                         if(strcmp($fI, "@DepartureDate") == 0){
                                                             $FareInfo0["DepartureDate"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@Amount") == 0){
                                                             $FareInfo0["Amount"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@NegotiatedFare") == 0){
                                                             $FareInfo0["NegotiatedFare"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@NotValidBefore") == 0){
                                                             $FareInfo0["NotValidBefore"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($fI, "@TaxAmount") == 0){
                                                             $FareInfo0["TaxAmount"] =$jsons18;
-                                                        } 
+                                                        }
                                                     }
                                                 }
                                                 // print_r($jsons17['air:FareRuleKey']);
@@ -1469,13 +1467,13 @@ EOM;
                                                         if(is_string($jsons19)){
                                                             if(strcmp($frk, "@FareInfoRef") == 0){
                                                                 $FareRuleKey0["FareInfoRef"] =$jsons19;
-                                                            } 
+                                                            }
                                                             if(strcmp($frk, "@ProviderCode") == 0){
                                                                 $FareRuleKey0["ProviderCode"] =$jsons19;
-                                                            } 
+                                                            }
                                                             if(strcmp($frk, "$") == 0){
                                                                 $FareRuleKey0["FareRuleKeyValue"] =$jsons19;
-                                                            } 
+                                                            }
                                                         }
                                                     }
                                                     $FareRuleKey1->push($FareRuleKey0);
@@ -1489,7 +1487,7 @@ EOM;
                                             if(array_key_exists('air:FareRuleKey', $jsons14['air:FareInfo'])){
                                                 // print_r($jsons14['air:FareInfo']['air:FareRuleKey']);
                                                 $FareRuleKey=[];
-                                                
+
                                                 foreach($jsons14['air:FareInfo']['air:FareRuleKey'] as $frk => $jsons18){
                                                     // print_r($jsons18);
                                                     // echo "<br/><br/><br/>";
@@ -1499,13 +1497,13 @@ EOM;
                                                         // echo "<br/><br/><br/>";
                                                         if(strcmp($frk, "@FareInfoRef") == 0){
                                                             $FareRuleKey["FareInfoRef"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($frk, "@ProviderCode") == 0){
                                                             $FareRuleKey["ProviderCode"] =$jsons18;
-                                                        } 
+                                                        }
                                                         if(strcmp($frk, "$") == 0){
                                                             $FareRuleKey["FareRuleKeyValue"] =$jsons18;
-                                                        } 
+                                                        }
                                                     }else{
                                                         foreach($jsons18 as $frk => $jsons19){
                                                             if(is_string($jsons19)){
@@ -1513,13 +1511,13 @@ EOM;
                                                                 // echo "<br/><br/><br/>";
                                                                 if(strcmp($frk, "@FareInfoRef") == 0){
                                                                     $FareRuleKey0["FareInfoRef"] =$jsons19;
-                                                                } 
+                                                                }
                                                                 if(strcmp($frk, "@ProviderCode") == 0){
                                                                     $FareRuleKey0["ProviderCode"] =$jsons19;
-                                                                } 
+                                                                }
                                                                 if(strcmp($frk, "$") == 0){
                                                                     $FareRuleKey0["FareRuleKeyValue"] =$jsons19;
-                                                                } 
+                                                                }
                                                             }
                                                         }
                                                         // if(empty($FareRuleKey) && !empty($FareRuleKey0)){
@@ -1538,8 +1536,8 @@ EOM;
                                         if(!empty($FareRuleKey)){
                                             $FareRuleKey1->push($FareRuleKey);
                                         }
-                                        
-                                        
+
+
                                     }
                                     if(array_key_exists('air:BookingInfo', $jsons14)){
                                         $BookingInfo1=collect();
@@ -1587,7 +1585,7 @@ EOM;
                                                             $BookingInfo0["HostTokenRef"] =$jsons18;
                                                         }
                                                     }
-                                                } 
+                                                }
                                             }
                                             if(empty($BookingInfo) && !empty($BookingInfo0)){
                                                 $BookingInfo1->push($BookingInfo0);
@@ -1616,7 +1614,7 @@ EOM;
                                                     if(strcmp($tki, "@Key") == 0){
                                                         $TaxInfo1["Key"] =$jsons18;
                                                     }
-                                                
+
                                                 }
                                             }
                                             $TaxInfo->push($TaxInfo1);
@@ -1658,14 +1656,14 @@ EOM;
                                                         $details4["changepenalty"]=$jsons18;
                                                     }
                                                     // print_r($c."- " .$jsons18);
-                                                    // echo "<br/><br/><br/>"; 
+                                                    // echo "<br/><br/><br/>";
                                                 }
-                                                
+
                                             }
                                         }
                                     }
                                     if(array_key_exists('air:CancelPenalty', $jsons14)){
-                                       
+
                                         foreach($jsons14['air:CancelPenalty'] as $jsons19){
                                             // print_r($jsons19);
                                             // echo "<br/><br/><br/>";
@@ -1675,9 +1673,9 @@ EOM;
                                                         $details4["cancelpenalty"]=$jsons20;
                                                     }
                                                     // print_r($c."- " .$jsons20);
-                                                    // echo "<br/><br/><br/>"; 
+                                                    // echo "<br/><br/><br/>";
                                                 }
-                                                
+
                                             }
                                         }
                                     }
@@ -1685,11 +1683,11 @@ EOM;
                                         // print_r($jsons14['air:BaggageAllowances']);
                                         // return $jsons14['air:BaggageAllowances'];
                                         // echo "<br/><br/>";
-                                        $count17=1;   
+                                        $count17=1;
                                         foreach($jsons14['air:BaggageAllowances'] as $jsons17){
                                             // echo $count17;
                                             // print_r($jsons17);
-                                            // echo "<br/><br/><br/>"; 
+                                            // echo "<br/><br/><br/>";
                                             if($count17==2){
                                                 // print_r($jsons17);
                                                 // echo "<br/><br/><br/>";
@@ -1719,9 +1717,9 @@ EOM;
                                                                         foreach($jsons20 as $bg=>$jsons21){
                                                                             // print_r($jsons21);
                                                                             // echo "<br/><br/><br/>";
-                                                                            if(strcmp($bg, "$") == 0){	
+                                                                            if(strcmp($bg, "$") == 0){
                                                                                 $details4["baggageallowanceinfo"]=$jsons21;
-                                                                            }	
+                                                                            }
                                                                         }
                                                                     }
                                                                     $count20++;
@@ -1740,7 +1738,7 @@ EOM;
                                                 foreach($jsons17 as $jsons18){
                                                     // print_r($jsons18);
                                                     // echo "<br/><br/><br/>";
-                                                    // if($count21==5){  //non stop flight  
+                                                    // if($count21==5){  //non stop flight
                                                     if($count21==2 && is_array($jsons18)){
                                                         // print_r($jsons18);
                                                         // echo "<br/><br/><br/>";
@@ -1748,7 +1746,7 @@ EOM;
                                                         foreach($jsons18 as $jsons19){
                                                             // echo $count22;
                                                             // print_r($jsons19);
-                                                            // echo "<br/><br/><br/>"; 
+                                                            // echo "<br/><br/><br/>";
                                                             if($count22==5){
                                                                 // print_r($jsons19);
                                                                 // echo "<br/><br/><br/>";
@@ -1758,16 +1756,16 @@ EOM;
                                                                     // echo "<br/><br/><br/>";
                                                                     if($count23==2){
                                                                         // print_r($jsons20);
-                                                                        // echo "<br/><br/><br/>"; 
+                                                                        // echo "<br/><br/><br/>";
                                                                         foreach($jsons20 as $cbb=>$jsons21){
                                                                             if(is_string($jsons21)){
                                                                                 // print_r($cbb."-".$jsons21);
                                                                                 // echo "<br/><br/><br/>";
-                                                                                if(strcmp($cbb, "$") == 0){	
+                                                                                if(strcmp($cbb, "$") == 0){
                                                                                     $details4["carryonallowanceinfo"]=$jsons21;
-                                                                                }	
+                                                                                }
                                                                             }
-                                                                            
+
                                                                         }
                                                                     }
                                                                     $count23++;
@@ -1790,9 +1788,9 @@ EOM;
                                                                         if(is_string($jsons20)){
                                                                             // print_r($cbb."-".$jsons21);
                                                                             // echo "<br/><br/><br/>";
-                                                                            if(strcmp($cbb, "$") == 0){	
+                                                                            if(strcmp($cbb, "$") == 0){
                                                                                 $details4["carryonallowanceinfo"]=$jsons20;
-                                                                            }	
+                                                                            }
                                                                         }
                                                                     }
                                                                 }
@@ -1803,14 +1801,14 @@ EOM;
                                                     $count21++;
                                                 }
                                             }
-                                            
+
                                             $count17++;
                                         }
                                     }
                                     $data->push(["details"=>$details4]);
                                 }
-                                $data->push(["price"=>collect($price)]);     
-                                $data->push(["AirPricingInfo"=>collect($AirPricingInfo)]);     
+                                $data->push(["price"=>collect($price)]);
+                                $data->push(["AirPricingInfo"=>collect($AirPricingInfo)]);
                                 $data->push(["FareInfo"=>$FareInfo1]);
                                 $data->push(["FareRuleKey"=>$FareRuleKey1]);
                                 $data->push(["BookingInfo"=>$BookingInfo1]);
@@ -1848,21 +1846,21 @@ EOM;
                                         $HostToken->push($HostToken1);
                                     }
                                 }
-                                $data->push(["HostToken"=>collect($HostToken)]);     
+                                $data->push(["HostToken"=>collect($HostToken)]);
                                 $data->push(["TaxInfo"=>$TaxInfo]);
                                 $data->push(["FareCalc"=>$FareCalc]);
                                 $data->push(["PassengerType"=>$PassengerType]);
 
                             }
-                            
+
                         }
-                    } 
+                    }
 
                 }
             }
         }
         // return $data;
-       
+
         $arrNewResult = array();
         // $arrNewResult['changepenalty'] = $data[1]['details']['changepenalty'];
         $arrNewResult['changepenalty'] = isset($data[1]['details']['changepenalty'])?$data[1]['details']['changepenalty']:'';
@@ -1899,13 +1897,13 @@ EOM;
         //         $arrNewResult['key']=$journeys[$i]['Key'];
         //     }
         // }
-       
+
         // // $arrNewResult = array();
         // // $arrNewResult['changepenalty'] = "gii";
         // // $arrNewResult['count'] = count($flights[0]);
         // $status_json = json_encode($arrNewResult);
         // echo $status_json;
-       
+
         // return  $flightss;
         // echo count($flights[0]);
         $datasegment='';
@@ -1922,7 +1920,7 @@ EOM;
         // echo $status_json;
         // $datasegment.= '<air:AirSegment Key="'.get_object_vars($journeys[$i]->Key)[0].'" Group="'.get_object_vars($journeys[$i]->Group)[0].'" Carrier="'.get_object_vars($journeys[$i]->Airline)[0].'" FlightNumber="'.get_object_vars($journeys[$i]->Flight)[0].'" Origin="'.get_object_vars($journeys[$i]->From)[0].'" Destination="'.get_object_vars($journeys[$i]->To)[0].'" DepartureTime="'.get_object_vars($journeys[$i]->Depart)[0].'" ArrivalTime="'.get_object_vars($journeys[$i]->Arrive)[0].'" FlightTime="'.get_object_vars($journeys[$i]->FlightTime)[0].'" Distance="'.get_object_vars($journeys[$i]->Distance)[0].'" ETicketability="Yes" Equipment="E90" ChangeOfPlane="false" ParticipantLevel="Secure Sell" LinkAvailability="true" PolledAvailabilityOption="Polled avail used" OptionalServicesIndicator="false" AvailabilitySource="S" AvailabilityDisplayType="Fare Shop/Optimal Shop" ProviderCode="1G" ClassOfService="W"></air:AirSegment>';
         // echo  get_object_vars($journeys[$i]->Key)[0]; echo "<br/>";
-        
+
         // return $datasegment;
         // foreach($flights[1] as $prices){
         // }
@@ -1967,12 +1965,12 @@ EOM;
         curl_setopt($soap_do, CURLOPT_RETURNTRANSFER, true);
         $return = curl_exec($soap_do);
         curl_close($soap_do);
-       
+
         $dom = new \DOMDocument();
         $dom->loadXML($return);
         $json = new \FluentDOM\Serializer\Json\RabbitFish($dom);
         $object = json_decode($json,true);
-       
+
         $data=collect();
         $journey=collect();
         $count=1;
@@ -1985,19 +1983,19 @@ EOM;
                             foreach($jsons2 as $jsons3){
                                 if(is_array($jsons3)){
                                     // echo $count." count";
-                                        // echo "<br/>"; 
+                                        // echo "<br/>";
                                     if($count==3){
                                         // print_r($jsons3);
-                                        // echo "<br/><br/>"; 
+                                        // echo "<br/><br/>";
                                         $count2=1;
                                         foreach($jsons3 as $jsons4){
                                             // echo "count";
                                             // print_r($jsons4);
-                                            // echo "<br/><br/>"; 
-                                            $journey=collect();     
+                                            // echo "<br/><br/>";
+                                            $journey=collect();
                                             if($count2==2){
                                                 // print_r($jsons4);
-                                                // echo "<br/><br/>"; 
+                                                // echo "<br/><br/>";
                                                 $details1=[];
                                                 // please check this position
                                                 foreach($jsons4 as $g => $jsons5){
@@ -2082,20 +2080,20 @@ EOM;
                                                                 if(strcmp($k, "@ClassOfService") == 0){
                                                                     $details["ClassOfService"]=$jsons6;
                                                                 }
-                                                               
+
 
                                                             }
                                                         }
                                                         if(empty($details1) && !empty($details)){
-                                                            $journey->push($details); 
-                                                        }    
+                                                            $journey->push($details);
+                                                        }
                                                     }
                                                 }
                                                 if(!empty($details1)){
-                                                    $journey->push($details1);     
+                                                    $journey->push($details1);
                                                 }
                                                 // return $journey;
-                                                $data->push(["journey"=>collect($journey)]);     
+                                                $data->push(["journey"=>collect($journey)]);
                                             }
                                             $count2++;
                                         }
@@ -2174,7 +2172,7 @@ EOM;
                                                                     foreach($jsons15 as $jsons16){
                                                                         // echo $count16;
                                                                         // print_r($jsons16);
-                                                                        // echo "<br/><br/><br/>"; 
+                                                                        // echo "<br/><br/><br/>";
                                                                         // if($count16==21){
                                                                         //     echo $count16;
                                                                         //     print_r($jsons16);
@@ -2193,9 +2191,9 @@ EOM;
                                                                                             $details4["changepenalty"]=$jsons18;
                                                                                         }
                                                                                         // print_r($c."- " .$jsons18);
-                                                                                        // echo "<br/><br/><br/>"; 
+                                                                                        // echo "<br/><br/><br/>";
                                                                                     }
-                                                                                    
+
                                                                                 }
                                                                             }
                                                                         }
@@ -2212,9 +2210,9 @@ EOM;
                                                                                             $details4["cancelpenalty"]=$jsons20;
                                                                                         }
                                                                                         // print_r($c."- " .$jsons20);
-                                                                                        // echo "<br/><br/><br/>"; 
+                                                                                        // echo "<br/><br/><br/>";
                                                                                     }
-                                                                                    
+
                                                                                 }
                                                                             }
                                                                         }
@@ -2222,11 +2220,11 @@ EOM;
                                                                             // echo $count16;
                                                                             // print_r($jsons16);
                                                                             // echo "<br/><br/><br/>";
-                                                                            $count17=1;   
+                                                                            $count17=1;
                                                                             foreach($jsons16 as $jsons17){
                                                                                 // echo $count17;
                                                                                 // print_r($jsons17);
-                                                                                // echo "<br/><br/><br/>"; 
+                                                                                // echo "<br/><br/><br/>";
                                                                                 if($count17==2){
                                                                                     // print_r($jsons17);
                                                                                     // echo "<br/><br/><br/>";
@@ -2256,9 +2254,9 @@ EOM;
                                                                                                             foreach($jsons20 as $bg=>$jsons21){
                                                                                                                 // print_r($jsons21);
                                                                                                                 // echo "<br/><br/><br/>";
-                                                                                                                if(strcmp($bg, "$") == 0){	
+                                                                                                                if(strcmp($bg, "$") == 0){
                                                                                                                     $details4["baggageallowanceinfo"]=$jsons21;
-                                                                                                                }	
+                                                                                                                }
                                                                                                             }
                                                                                                         }
                                                                                                         $count20++;
@@ -2277,7 +2275,7 @@ EOM;
                                                                                     foreach($jsons17 as $jsons18){
                                                                                         // print_r($jsons18);
                                                                                         // echo "<br/><br/><br/>";
-                                                                                        // if($count21==5){  //non stop flight  
+                                                                                        // if($count21==5){  //non stop flight
                                                                                         if($count21==2 && is_array($jsons18)){
                                                                                             // print_r($jsons18);
                                                                                             // echo "<br/><br/><br/>";
@@ -2285,7 +2283,7 @@ EOM;
                                                                                             foreach($jsons18 as $jsons19){
                                                                                                 // echo $count22;
                                                                                                 // print_r($jsons19);
-                                                                                                // echo "<br/><br/><br/>"; 
+                                                                                                // echo "<br/><br/><br/>";
                                                                                                 if($count22==5){
                                                                                                     // print_r($jsons19);
                                                                                                     // echo "<br/><br/><br/>";
@@ -2295,16 +2293,16 @@ EOM;
                                                                                                         // echo "<br/><br/><br/>";
                                                                                                         if($count23==2){
                                                                                                             // print_r($jsons20);
-                                                                                                            // echo "<br/><br/><br/>"; 
+                                                                                                            // echo "<br/><br/><br/>";
                                                                                                             foreach($jsons20 as $cbb=>$jsons21){
                                                                                                                 if(is_string($jsons21)){
                                                                                                                     // print_r($cbb."-".$jsons21);
                                                                                                                     // echo "<br/><br/><br/>";
-                                                                                                                    if(strcmp($cbb, "$") == 0){	
+                                                                                                                    if(strcmp($cbb, "$") == 0){
                                                                                                                         $details4["carryonallowanceinfo"]=$jsons21;
-                                                                                                                    }	
+                                                                                                                    }
                                                                                                                 }
-                                                                                                                
+
                                                                                                             }
                                                                                                         }
                                                                                                         $count23++;
@@ -2327,9 +2325,9 @@ EOM;
                                                                                                             if(is_string($jsons20)){
                                                                                                                 // print_r($cbb."-".$jsons21);
                                                                                                                 // echo "<br/><br/><br/>";
-                                                                                                                if(strcmp($cbb, "$") == 0){	
+                                                                                                                if(strcmp($cbb, "$") == 0){
                                                                                                                     $details4["carryonallowanceinfo"]=$jsons20;
-                                                                                                                }	
+                                                                                                                }
                                                                                                             }
                                                                                                         }
                                                                                                     }
@@ -2340,7 +2338,7 @@ EOM;
                                                                                         $count21++;
                                                                                     }
                                                                                 }
-                                                                                
+
                                                                                 $count17++;
                                                                             }
                                                                         }
@@ -2360,21 +2358,21 @@ EOM;
                                             }
                                         }
                                         // print_r($jsons3);
-                                        // echo "<br/>"; 
+                                        // echo "<br/>";
                                     }
                                     $count++;
                                 }
-                               
+
                             }
                             // print_r($jsons2);
-                            // echo "<br/><br/><br/><br/><br/>"; 
+                            // echo "<br/><br/><br/><br/><br/>";
                         }
-                    } 
+                    }
                 }
             }
         }
         // return $data;
-       
+
         $arrNewResult = array();
         // $arrNewResult['changepenalty'] = $data[1]['details']['changepenalty'];
         $arrNewResult['changepenalty'] = isset($data[1]['details']['changepenalty'])?$data[1]['details']['changepenalty']:'';
